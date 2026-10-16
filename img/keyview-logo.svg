@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="kvBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2E39"/><stop offset="1" stop-color="#0A141A"/></linearGradient>
+    <linearGradient id="kvGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3DFB2"/><stop offset=".55" stop-color="#D2B275"/><stop offset="1" stop-color="#A3804C"/></linearGradient>
+    <radialGradient id="kvLens" cx=".38" cy=".34" r=".7"><stop offset="0" stop-color="#2C4A5A"/><stop offset="1" stop-color="#0A141A"/></radialGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#kvBg)"/>
+  <rect x=".6" y=".6" width="46.8" height="46.8" rx="11.4" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="1.2"/>
+  <g fill="none" stroke="url(#kvGold)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10.5 16.5v-6h6"/><path d="M31.5 10.5h6v6"/><path d="M37.5 31.5v6h-6"/><path d="M16.5 37.5h-6v-6"/>
+  </g>
+  <path d="M24 13.6a6.4 6.4 0 0 1 3.1 12l1.6 8.6a1.2 1.2 0 0 1-1.2 1.4h-7a1.2 1.2 0 0 1-1.2-1.4l1.6-8.6A6.4 6.4 0 0 1 24 13.6z" fill="url(#kvGold)"/>
+  <circle cx="24" cy="20" r="3.1" fill="url(#kvLens)"/>
+  <circle cx="22.9" cy="18.9" r=".85" fill="#fff" fill-opacity=".85"/>
+</svg>
