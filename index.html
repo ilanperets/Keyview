@@ -1303,6 +1303,109 @@ h1,h2,h3,.tb-t{text-wrap:balance}
 <div id="vidPool" aria-hidden="true"></div>
 <nav class="tabbar" id="tabbar" aria-label="ניווט מהיר"></nav>
 
+<style id="kv-dash-css">
+/* ============ KEYVIEW v2: control board, videos, clients, tools ============ */
+#v-board,#v-videos,#v-tools{display:block}
+#v-board[hidden],#v-videos[hidden],#v-tools[hidden]{display:none!important}
+.kv-hero{position:relative;border-radius:18px;overflow:hidden;background:#081219 url(show/hero.jpg) center/cover;min-height:290px;color:#fff;display:flex;align-items:flex-end;isolation:isolate}
+.kv-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.kv-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,rgba(8,18,25,.92) 8%,rgba(8,18,25,.55) 55%,rgba(8,18,25,.15))}
+.kv-hero-in{padding:30px 34px;width:100%;display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap}
+.kv-hero h2{font-family:var(--display);font-weight:400;font-size:clamp(46px,6vw,70px);line-height:.95;margin:8px 0 10px;color:#fff}
+.kv-hero p{margin:0;color:#D6DCDF;max-width:46ch}
+.kv-hero .eyebrow{color:#D9C49C}
+.kv-cta{margin-inline-start:auto;display:flex;gap:10px;flex-wrap:wrap}
+.kv-hero .btn.ghost{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35);color:#fff}
+.kv-hero .btn.ghost:hover{background:rgba(255,255,255,.18)}
+.kv-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 4px}
+.kv-kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.kv-kpi small{color:var(--ink-3);font-size:12.5px;font-weight:500;display:block}
+.kv-kpi b{display:block;font-family:var(--display);font-weight:400;font-size:46px;line-height:1;margin-top:6px}
+.kv-kpi b i{font-style:normal;font-size:13px;font-family:var(--body);color:var(--good);font-weight:600;margin-inline-start:6px}
+.kv-sec-h{display:flex;align-items:baseline;gap:12px;margin:26px 0 12px;flex-wrap:wrap}
+.kv-sec-h h3{margin:0;font-size:19px;font-weight:600}
+.kv-sec-h .hint{color:var(--ink-3);font-size:13px}
+.kv-sec-h .kv-more{margin-inline-start:auto;border:0;background:none;color:var(--gold-2);font-weight:600;font-size:13.5px;cursor:pointer;padding:0}
+.kv-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kv-col{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:grid;gap:10px;align-content:start;min-height:120px}
+.kv-col h4{margin:2px 4px;font-size:13.5px;font-weight:700;display:flex;gap:8px;align-items:center}
+.kv-col h4 .dot{width:8px;height:8px;border-radius:50%}
+.kv-col h4 em{font-style:normal;margin-inline-start:auto;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:0 8px;font-size:12px;color:var(--ink-2)}
+.kv-card{all:unset;box-sizing:border-box;display:block;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.kv-card:hover{border-color:var(--gold-line);transform:translateY(-1px)}
+.kv-card:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.kv-th{display:grid;place-items:center;height:92px;background:#0b1820 center/cover no-repeat;color:rgba(255,255,255,.7)}
+.kv-th.ph{background-image:linear-gradient(135deg,var(--c,#0B3B4C),#0b1820)}
+.kv-th .i{width:26px;height:26px}
+.kv-tx{padding:10px 12px 12px;display:grid;gap:4px}
+.kv-tx b{font-size:14px;font-weight:600;color:var(--ink)}
+.kv-tx span.s{font-size:12.5px;color:var(--ink-3)}
+.kv-tx .pill{justify-self:start}
+.kv-empty{border:1.5px dashed var(--line);border-radius:12px;padding:16px 12px;text-align:center;color:var(--ink-3);font-size:13px;background:transparent;width:100%;font-family:inherit}
+button.kv-empty{cursor:pointer;color:var(--gold-2);font-weight:600}
+button.kv-empty:hover{background:var(--gold-soft)}
+.kv-types{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kv-type{all:unset;box-sizing:border-box;position:relative;border-radius:16px;overflow:hidden;min-height:190px;background:#0b1820 center/cover;color:#fff;display:flex;align-items:flex-end;box-shadow:var(--shadow);cursor:pointer;isolation:isolate}
+.kv-type::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(8,18,25,.92),rgba(8,18,25,.1) 70%)}
+.kv-type:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.kv-type>span.kv-ti{padding:16px;width:100%;display:block}
+.kv-type h4{margin:6px 0 2px;font-size:18px;font-weight:600;color:#fff}
+.kv-type p{margin:0;font-size:12.5px;color:#C9D1D5}
+.kv-type .eyebrow{color:#D9C49C}
+.kv-type.soon{filter:saturate(.35) brightness(.8);cursor:default}
+.kv-type .tag{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;border-radius:99px;padding:3px 10px;background:var(--sun);color:#fff}
+.kv-type.soon .tag{background:rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+.kv-clients{display:flex;gap:14px;flex-wrap:wrap}
+.kv-cl{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;gap:12px;align-items:center;min-width:230px;box-shadow:var(--shadow)}
+.kv-cl:hover{border-color:var(--gold-line)}
+.kv-cl:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.kv-cl .lg{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:18px;flex:none}
+.kv-cl b{display:block;font-size:14.5px;color:var(--ink)}
+.kv-cl span.s{font-size:12.5px;color:var(--ink-3)}
+.kv-cl.add{border-style:dashed;color:var(--gold-2);font-weight:600;justify-content:center;background:transparent;box-shadow:none}
+.kv-chips{display:flex;gap:8px;flex-wrap:wrap}
+.kv-chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 14px;font-size:13.5px;font-weight:500;color:var(--ink-2);cursor:pointer;display:inline-flex;gap:7px;align-items:center;font-family:inherit}
+.kv-chip:hover{border-color:var(--gold-line)}
+.kv-chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.kv-chip em{font-style:normal;font-size:12px;opacity:.7}
+.kv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.kv-grid .kv-th{height:130px}
+.kv-lead{margin:0 0 4px;color:var(--ink-2);max-width:70ch}
+.kv-tgrp{margin:22px 0 10px;font-size:13px;font-weight:700;color:var(--ink-3);letter-spacing:.3px}
+.kv-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.kv-tool{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}
+.kv-tool:hover{border-color:var(--gold-line)}
+.kv-tool:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.kv-tool .ic{width:38px;height:38px;border-radius:10px;background:var(--gold-soft);color:var(--gold-2);display:grid;place-items:center;flex:none}
+.kv-tool b{display:block;font-size:14.5px;color:var(--ink)}
+.kv-tool span.s{font-size:12.5px;color:var(--ink-3);line-height:1.4;display:block;margin-top:2px}
+.kv-active{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0 0;color:var(--ink-2);font-size:13.5px}
+.kv-active select{max-width:260px}
+.ni.kv-new{color:var(--sun-2);font-weight:700}
+.ni.kv-new svg.i{color:var(--sun)}
+.tabbar button.kv-tb-new{color:var(--sun-2);font-weight:700}
+/* dialog */
+.kv-dlg{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:16px}
+.kv-dlg[hidden]{display:none!important}
+.kv-dlg-scrim{position:absolute;inset:0;background:rgba(12,26,34,.45);backdrop-filter:blur(3px)}
+.kv-dlg-p{position:relative;background:var(--surface);border-radius:18px;box-shadow:0 30px 80px -20px rgba(12,26,34,.5);width:min(480px,100%);max-height:calc(100dvh - 32px);overflow:auto;padding:20px 22px 22px;display:grid;gap:14px}
+.kv-dlg-p h3{margin:0;font-size:19px;font-weight:700}
+.kv-dlg-p .f{display:grid;gap:5px}
+.kv-dlg-p .f label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.kv-dlg-p .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.kv-dlg-p .kv-soon{opacity:.5;cursor:not-allowed}
+.kv-dlg-note{background:var(--gold-soft);border:1px solid var(--gold-line);border-radius:12px;padding:12px 14px;font-size:14px;color:#6E5223}
+@media (max-width:1000px){.kv-types{grid-template-columns:repeat(2,minmax(0,1fr))}.kv-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){
+  .kv-hero{min-height:260px}.kv-hero-in{padding:22px 18px}.kv-cta{margin:0;width:100%}.kv-cta .btn{flex:1;justify-content:center}
+  .kv-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kv-kpi b{font-size:40px}
+  .kv-board{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:78%;overflow-x:auto;margin:0 -16px;padding:0 16px 6px;scroll-snap-type:x mandatory}
+  .kv-col{scroll-snap-align:start}
+  .kv-type{min-height:150px}.kv-cl{min-width:100%}
+  .kv-dlg{place-items:end center;padding:0}.kv-dlg-p{border-radius:18px 18px 0 0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){.kv-card{transition:none}}
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 window.__SHOWDUR={"montage": 15.5, "lifestyle": 24.8, "sea": 35.8, "luxury": 22.6, "progress": 18.8, "plan": 23.0, "action": 21.4};
@@ -9713,6 +9816,270 @@ Sentence: ${raw}`;
   /* dress what is on screen now */
   if (typeof startView !== 'undefined' && (startView === 'studio' || startView === 'data')) go(startView);
   else go(currentView());
+})();
+
+
+/* ============ KEYVIEW v2: control board, videos, clients, tools ============
+   One IA on top of the existing engine: Control board (status board of videos) → New video → Clients → Media,
+   everything else lives under "Advanced tools". Nothing is removed; sample clients are cleaned once per device. */
+(function () {
+  'use strict';
+  const BLANK = 'הפרויקט שלי', FLAG = 'kv.v2.clean';
+  const ic = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const STAT = [
+    { id: 'draft', n: 'טיוטה', label: 'טיוטה', c: '#9AA6AC', pill: 'grey', empty: '' },
+    { id: 'prod', n: 'בהפקה', label: 'בהפקה', c: 'var(--brand)', pill: 'sun', empty: 'אין כרגע סרטונים בהפקה' },
+    { id: 'review', n: 'לאישור', label: 'ממתין לאישור', c: 'var(--warnc)', pill: 'warn', empty: 'אין מה לאשר' },
+    { id: 'done', n: 'מוכן', label: 'מוכן לפרסום', c: 'var(--good)', pill: 'good', empty: 'עוד לא הושלם סרטון' }];
+  const VT = [
+    { id: 'reel', n: 'רילס / סטורי', en: 'REELS', d: 'אווטאר, הוק וכתוביות, עד 30 שניות', on: true, img: 'clips/l_spin.jpg' },
+    { id: 'ad', n: 'פרסומת', en: 'AD', d: '15 עד 30 שניות, הוק והצעה', img: 'clips/x_towerspark.jpg' },
+    { id: 'carousel', n: 'קרוסלה / פוסט', en: 'CAROUSEL', d: 'חמישה שקפים לפיד', img: 'clips/v_balcony.jpg' },
+    { id: 'project', n: 'סרטון פרויקט', en: 'PROJECT FILM', d: 'הדמיות, מיקום ותמהיל', img: 'clips/v_towers.jpg' }];
+
+  /* ---------- clients & videos ---------- */
+  const isPh = r => !!(r.blank && r.data && r.data.name === BLANK && !(r.assets || []).length && !(r.videos || []).length && !r.data.city);
+  const realClients = () => S.projects.filter(r => !isPh(r));
+  const allVideos = () => S.projects.flatMap(r => (r.videos || []).map(v => ({ v, r })));
+  const stOf = id => STAT.find(s => s.id === id) || STAT[0];
+  const tyOf = id => VT.find(t => t.id === id) || VT[0];
+  function emptyRecord() {
+    const data = { ...sampleData('sea'), name: BLANK, developer: '', clientType: 'יזם', city: '', address: '', stage: 'טרום שיווק', units: '', floors: '', towers: '', built: 0, delivery: '', tagline: '', tone: 'יוקרתי', primary: '#0B3B4C', accent: '#D7A55A', phone: '', cta: 'השאירו פרטים', site: '', audience: [], amen: '', types: [], loc: [], pros: [] };
+    const r = newRecord({ data, assets: [], recipe: 'sea' });
+    r.leads = []; r.campaigns = []; r.posts = []; r.calCleared = true; r.blank = true; r.isSample = false; r.videos = [];
+    return r;
+  }
+  function migrate() { // once per device: the two demo clients go away; one empty placeholder keeps the engine happy
+    try { if (localStorage.getItem(FLAG) === '1') return; } catch (e) { }
+    const keep = S.projects.filter(r => !r.isSample), changed = keep.length !== S.projects.length;
+    S.projects = keep;
+    if (!S.projects.length) {
+      const b = emptyRecord(); S.projects = [b]; S.active = b.id;
+      if (!S.shots?.length) buildRecipe(S.recipe);
+    } else if (!S.projects.some(p => p.id === S.active)) S.active = S.projects[0].id;
+    try { localStorage.setItem(FLAG, '1'); } catch (e) { }
+    if (changed) { S.projects.forEach(p => dirty.add(p.id)); save(); }
+  }
+  function addVideo(r, o) {
+    const v = { id: 'v' + uid(), title: o.title, type: o.type || 'reel', status: 'draft', created: Date.now(), updated: Date.now() };
+    (r.videos = r.videos || []).unshift(v); r.updated = Date.now(); dirty.add(r.id); save(); return v;
+  }
+  const refresh = () => { renderChrome(); if (VIEWS[view]) VIEWS[view][2](); };
+
+  /* ---------- pieces ---------- */
+  const thumb = r => { const cv = coverOf(r); return cv ? `<span class="kv-th" style="background-image:url('${esc(cv)}')"></span>` : `<span class="kv-th ph" style="--c:${esc(r.data.primary || '#0B3B4C')}">${ic('film')}</span>`; };
+  const card = ({ v, r }) => `<button type="button" class="kv-card" data-kv-edit="${r.id}:${v.id}">${thumb(r)}<span class="kv-tx"><b>${esc(v.title)}</b><span class="s">${esc(tyOf(v.type).n)}${isPh(r) ? '' : ' · ' + esc(r.data.name)}</span><span class="pill ${stOf(v.status).pill}">${stOf(v.status).label}</span></span></button>`;
+  const greeting = () => { const h = new Date().getHours(); return h < 5 ? 'לילה טוב' : h < 12 ? 'בוקר טוב' : h < 18 ? 'צהריים טובים' : h < 22 ? 'ערב טוב' : 'לילה טוב'; };
+  const sortNew = (a, b) => (b.v.updated || 0) - (a.v.updated || 0);
+
+  /* ---------- control board ---------- */
+  function renderBoard() {
+    const el = $('#v-board'), vids = allVideos(), cls = realClients();
+    const rev = vids.filter(x => x.v.status === 'review').length, prod = vids.filter(x => x.v.status === 'prod').length;
+    let line;
+    if (!cls.length) line = 'התחל בהוספת לקוח (אפשר להוסיף גם את עצמך), ואז צור את הסרטון הראשון.';
+    else if (!vids.length) line = 'עוד אין סרטונים. הסרטון הראשון נמצא במרחק בריף אחד.';
+    else line = `${rev ? (rev === 1 ? 'סרטון אחד מחכה לאישור' : rev + ' סרטונים מחכים לאישור') : 'אין סרטונים שמחכים לאישור'}, ${prod ? (prod === 1 ? 'אחד בהפקה' : prod + ' בהפקה') : 'אף אחד לא בהפקה כרגע'}.`;
+    const now = new Date(), m0 = new Date(now.getFullYear(), now.getMonth(), 1).getTime(), pm0 = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime(), wk = Date.now() - 7 * 864e5;
+    const thisM = vids.filter(x => (x.v.created || 0) >= m0).length, lastM = vids.filter(x => (x.v.created || 0) >= pm0 && (x.v.created || 0) < m0).length;
+    const doneWk = vids.filter(x => x.v.status === 'done' && (x.v.doneAt || x.v.updated || 0) >= wk).length;
+    const delta = thisM - lastM;
+    const cols = STAT.map(s => {
+      const list = vids.filter(x => x.v.status === s.id).sort(sortNew), shown = list.slice(0, 4);
+      const body = shown.map(card).join('') + (list.length > 4 ? `<button type="button" class="kv-empty" data-kv-vf="${s.id}">+ עוד ${list.length - 4}</button>` : '')
+        || (s.id === 'draft' ? `<button type="button" class="kv-empty" data-kv-new="reel">+ סרטון חדש</button>` : `<div class="kv-empty">${s.empty}</div>`);
+      return `<div class="kv-col"><h4><span class="dot" style="background:${s.c}"></span>${s.n}<em>${list.length}</em></h4>${body}</div>`;
+    }).join('');
+    const types = VT.map(t => t.on
+      ? `<button type="button" class="kv-type" data-kv-new="${t.id}" style="background-image:url(${t.img})"><span class="tag">פעיל</span><span class="kv-ti"><span class="eyebrow">${t.en}</span><h4>${t.n}</h4><p>${t.d}</p></span></button>`
+      : `<div class="kv-type soon" aria-disabled="true" style="background-image:url(${t.img})"><span class="tag">בקרוב</span><span class="kv-ti"><span class="eyebrow">${t.en}</span><h4>${t.n}</h4><p>${t.d}</p></span></div>`).join('');
+    const clients = cls.map(r => { const n = (r.videos || []).length; return `<button type="button" class="kv-cl" data-kv-client="${r.id}"><span class="lg" style="background:${esc(r.data.primary || '#0B3B4C')}">${esc((r.data.name || '?').trim().charAt(0))}</span><span><b>${esc(r.data.name)}</b><span class="s">${esc(r.data.clientType || '')} · ${n === 1 ? 'סרטון אחד' : n + ' סרטונים'}</span></span></button>`; }).join('')
+      + `<button type="button" class="kv-cl add" data-kv-addclient="1">${ic('plus')}&nbsp;${cls.length ? 'הוסף לקוח' : 'הוסף לקוח ראשון'}</button>`;
+    const advIds = ['director', 'editor', 'cine3d', 'creator', 'campaigns', 'leads', 'landing'].filter(k => VIEWS[k]);
+    const adv = advIds.map(k => `<button type="button" class="kv-chip" data-go="${k}">${esc(VIEWS[k][0])}</button>`).join('') + `<button type="button" class="kv-chip" data-go="tools">כל הכלים ←</button>`;
+    el.innerHTML = `
+      <section class="kv-hero"><video muted loop playsinline autoplay preload="metadata" poster="show/hero.jpg" src="clips/x_waves.mp4" aria-hidden="true"></video>
+        <div class="kv-hero-in"><div><span class="eyebrow">KEYVIEW STUDIO</span><h2>${greeting()}</h2><p>${line}</p></div>
+        <div class="kv-cta"><button type="button" class="btn sun" data-kv-new="reel">${ic('spark')}סרטון חדש</button><button type="button" class="btn ghost" data-go="home">${ic('play')}לצפות בדוגמאות</button></div></div></section>
+      <div class="kv-kpis">
+        <div class="kv-kpi"><small>סרטונים החודש</small><b>${thisM}${lastM > 0 && delta > 0 ? `<i>▲ ${delta}</i>` : ''}</b></div>
+        <div class="kv-kpi"><small>ממתינים לאישור</small><b>${rev}</b></div>
+        <div class="kv-kpi"><small>הופקו השבוע</small><b>${doneWk}</b></div>
+        <div class="kv-kpi"><small>לקוחות פעילים</small><b>${cls.length}</b></div></div>
+      <div class="kv-sec-h"><h3>לוח סטטוסים</h3><span class="hint">כל הסרטונים, מהבריף ועד המוכן</span><button type="button" class="kv-more" data-go="videos">לכל הסרטונים ←</button></div>
+      <div class="kv-board">${cols}</div>
+      <div class="kv-sec-h"><h3>מה מפיקים היום?</h3><span class="hint">בוחרים סוג, והמערכת מובילה צעד אחרי צעד</span></div>
+      <div class="kv-types">${types}</div>
+      <div class="kv-sec-h"><h3>לקוחות</h3>${cls.length ? `<button type="button" class="kv-more" data-go="projects">כל הלקוחות ←</button>` : ''}</div>
+      <div class="kv-clients">${clients}</div>
+      <div class="kv-sec-h"><h3>כלים מתקדמים</h3></div>
+      <div class="kv-chips">${adv}</div>`;
+    const hv = $('video', el); if (hv) { hv.muted = true; if (reduced.matches) hv.pause(); else hv.play().catch(() => { }); }
+  }
+
+  /* ---------- all videos ---------- */
+  const VF = { st: 'all', cl: 'all' };
+  function renderVideos() {
+    const el = $('#v-videos'), cls = realClients(), vids = allVideos();
+    if (VF.cl !== 'all' && !cls.some(r => r.id === VF.cl)) VF.cl = 'all';
+    const byCl = vids.filter(x => VF.cl === 'all' || x.r.id === VF.cl);
+    const list = byCl.filter(x => VF.st === 'all' || x.v.status === VF.st).sort(sortNew);
+    const chips = [{ id: 'all', n: 'הכל' }, ...STAT].map(s => `<button type="button" class="kv-chip" data-kv-st="${s.id}" aria-pressed="${VF.st === s.id}">${s.n}<em>${s.id === 'all' ? byCl.length : byCl.filter(x => x.v.status === s.id).length}</em></button>`).join('');
+    const sel = cls.length > 1 ? `<select class="in" id="kvVFClient" aria-label="לקוח" style="width:auto"><option value="all">כל הלקוחות</option>${cls.map(r => `<option value="${r.id}" ${VF.cl === r.id ? 'selected' : ''}>${esc(r.data.name)}</option>`).join('')}</select>` : '';
+    el.innerHTML = `<div class="kv-sec-h" style="margin-top:6px"><p class="kv-lead" style="flex:1 1 280px">כל הסרטונים של כל הלקוחות במקום אחד. לחיצה על סרטון פותחת עריכה של השם, הלקוח והסטטוס.</p><button type="button" class="btn sun" data-kv-new="reel">${ic('spark')}סרטון חדש</button></div>
+      <div class="row" style="gap:10px"><div class="kv-chips">${chips}</div>${sel}</div>
+      ${list.length ? `<div class="kv-grid">${list.map(card).join('')}</div>` : `<div class="kv-empty" style="padding:34px 14px">${vids.length ? 'אין סרטונים בסינון הזה.' : 'עוד אין סרטונים. לחץ על "סרטון חדש" כדי ליצור את הראשון.'}</div>`}`;
+  }
+
+  /* ---------- advanced tools ---------- */
+  const TOOLGROUPS = [
+    ['הפקת סרטונים', [['director', 'spark', 'מתכון קולנועי, שוטים, כותרות וייצוא סרטון'], ['cine3d', 'film', 'הדמיה הופכת לסרט עם עומק אמיתי'], ['editor', 'layers', 'חיתוך, כותרות, מוזיקה ואפקטים על ציר זמן'], ['creator', 'camera', 'סרטון מדבר מהטלפון עם כתוביות מילה אחר מילה'], ['carousel', 'image', 'חמישה שקפים 1080×1350 לפיד'], ['landing', 'page', 'דף נחיתה לפרויקט עם טופס לידים']]],
+    ['תוכן והפצה', [['calendar', 'cal', 'חודש של פוסטים עם הוק וכיתוב'], ['publish', 'send', 'ערוצים ותור הפצה (בדמו הפרסום מדומה)'], ['campaigns', 'target', 'קמפיינים ממומנים: תקציב, קהל וטקסטים']]],
+    ['הלקוח הפעיל', [['overview', 'building', 'סקירה מהירה של הלקוח'], ['project', 'brief', 'בריף ומיתוג: מכאן נגזר כל התוכן']]],
+    ['ניתוח ותצוגה', [['leads', 'users', 'משפך מכירה ולידים'], ['dashboard', 'dash', 'הדשבורד הקודם: גרפים וביצועים'], ['home', 'play', 'סרטוני ההדגמה הראשונים של המערכת']]]];
+  function renderTools() {
+    const el = $('#v-tools'), cls = realClients();
+    const opts = (cls.length ? cls : S.projects).map(r => `<option value="${r.id}" ${r.id === S.active ? 'selected' : ''}>${esc(isPh(r) ? 'ללא לקוח' : r.data.name)}</option>`).join('');
+    el.innerHTML = `<p class="kv-lead">כל היכולות של המערכת, במקום אחד. חלק מהכלים עובדים על הלקוח הפעיל.</p>
+      <div class="kv-active"><span>הלקוח הפעיל:</span><select class="in" id="kvToolClient" aria-label="לקוח פעיל">${opts}</select></div>
+      ${TOOLGROUPS.map(([g, items]) => { const rows = items.filter(([k]) => VIEWS[k]); return rows.length ? `<div class="kv-tgrp">${g}</div><div class="kv-tools">${rows.map(([k, i, d]) => `<button type="button" class="kv-tool" data-go="${k}"><span class="ic">${ic(i)}</span><span><b>${esc(VIEWS[k][0])}</b><span class="s">${d}</span></span></button>`).join('')}</div>` : ''; }).join('')}`;
+  }
+
+  /* ---------- new / edit video dialog ---------- */
+  let dlg = null, dlgState = null, lastFocus = null;
+  function ensureDlg() {
+    if (dlg) return;
+    dlg = document.createElement('div'); dlg.className = 'kv-dlg'; dlg.id = 'kvDlg'; dlg.hidden = true;
+    dlg.innerHTML = '<div class="kv-dlg-scrim" data-kv-close="1"></div><div class="kv-dlg-p" role="dialog" aria-modal="true" aria-labelledby="kvDlgT"></div>';
+    document.body.appendChild(dlg);
+    dlg.addEventListener('click', e => {
+      if (e.target.closest('[data-kv-close]')) { closeDlg(); return; }
+      const t = e.target.closest('button'); if (!t) return;
+      if (t.dataset.kvType) { dlgState.type = t.dataset.kvType; $$('#kvTypes .kv-chip', dlg).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kvType === dlgState.type))); return; }
+      if (t.id === 'kvSave') { saveDlg(); return; }
+      if (t.id === 'kvDel') {
+        if (t.dataset.arm !== '1') { t.dataset.arm = '1'; t.textContent = 'לחצו שוב למחיקה'; t.classList.add('sun'); setTimeout(() => { if (t.isConnected) { t.dataset.arm = ''; t.textContent = 'מחיקה'; t.classList.remove('sun'); } }, 3000); return; }
+        const r = S.projects.find(p => p.id === dlgState.rid); if (r) { r.videos = (r.videos || []).filter(v => v.id !== dlgState.vid); r.updated = Date.now(); dirty.add(r.id); save(); }
+        closeDlg(); refresh(); toast('הסרטון נמחק');
+      }
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && dlg && !dlg.hidden) closeDlg(); });
+  }
+  function closeDlg() { if (!dlg || dlg.hidden) return; dlg.hidden = true; dlgState = null; try { lastFocus && lastFocus.isConnected && lastFocus.focus(); } catch (e) { } }
+  function openDlg(o = {}) {
+    ensureDlg(); lastFocus = document.activeElement;
+    const cls = realClients(), p = $('.kv-dlg-p', dlg); let rec = null, vid = null;
+    if (o.rid && o.vid) { rec = S.projects.find(x => x.id === o.rid); vid = rec && (rec.videos || []).find(v => v.id === o.vid); if (!vid) return; }
+    if (!vid && !cls.length) {
+      p.innerHTML = `<h3 id="kvDlgT">סרטון חדש</h3><div class="kv-dlg-note">כדי ליצור סרטון צריך קודם לקוח. אם אלה סרטונים על עצמך או על העסק שלך, הוסף את עצמך כלקוח.</div><div class="row"><button type="button" class="btn sun" data-kv-addclient="1">${ic('plus')}הוספת לקוח</button><button type="button" class="btn ghost" data-kv-close="1">סגירה</button></div>`;
+      dlgState = {}; dlg.hidden = false; return;
+    }
+    const base = cls.slice(); if (rec && !base.includes(rec)) base.unshift(rec);
+    dlgState = { rid: rec ? rec.id : (base.find(r => r.id === S.active) || base[0]).id, vid: vid ? vid.id : null, type: vid ? vid.type : (o.type && VT.some(t => t.id === o.type && t.on) ? o.type : 'reel') };
+    p.innerHTML = `<h3 id="kvDlgT">${vid ? 'עריכת סרטון' : 'סרטון חדש'}</h3>
+      <div class="f"><label for="kvTitle">שם הסרטון</label><input class="in" id="kvTitle" maxlength="90" placeholder="לדוגמה: טיפ שבועי על משכנתאות" value="${vid ? esc(vid.title) : ''}"></div>
+      <div class="f"><label for="kvClient">לקוח</label><select class="in" id="kvClient">${base.map(r => `<option value="${r.id}" ${r.id === dlgState.rid ? 'selected' : ''}>${esc(r.data.name)}</option>`).join('')}</select></div>
+      <div class="f"><label>סוג</label><div class="kv-chips" id="kvTypes">${VT.map(t => t.on ? `<button type="button" class="kv-chip" data-kv-type="${t.id}" aria-pressed="${t.id === dlgState.type}">${t.n}</button>` : `<button type="button" class="kv-chip kv-soon" disabled>${t.n} · בקרוב</button>`).join('')}</div></div>
+      ${vid ? `<div class="f"><label for="kvStatus">סטטוס</label><select class="in" id="kvStatus">${STAT.map(s => `<option value="${s.id}" ${s.id === vid.status ? 'selected' : ''}>${s.n}</option>`).join('')}</select></div>` : ''}
+      <div class="row"><button type="button" class="btn sun" id="kvSave">${vid ? 'שמירה' : 'יצירת טיוטה'}</button><button type="button" class="btn ghost" data-kv-close="1">ביטול</button>${vid ? `<button type="button" class="btn ghost" id="kvDel" style="margin-inline-start:auto">מחיקה</button>` : ''}</div>`;
+    dlg.hidden = false; setTimeout(() => { const t = $('#kvTitle'); t && t.focus(); }, 30);
+    $('#kvTitle').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); saveDlg(); } });
+  }
+  function saveDlg() {
+    const title = $('#kvTitle').value.trim(); if (!title) { toast('כתבו שם לסרטון'); $('#kvTitle').focus(); return; }
+    const r = S.projects.find(p => p.id === $('#kvClient').value); if (!r) return;
+    if (!dlgState.vid) { addVideo(r, { title, type: dlgState.type }); toast('הסרטון נוסף כטיוטה'); }
+    else {
+      const old = S.projects.find(p => p.id === dlgState.rid), v = old && (old.videos || []).find(x => x.id === dlgState.vid); if (!v) { closeDlg(); return; }
+      const st = $('#kvStatus').value;
+      if (st === 'done' && v.status !== 'done') v.doneAt = Date.now();
+      v.title = title; v.type = dlgState.type; v.status = st; v.updated = Date.now();
+      if (old.id !== r.id) { old.videos = old.videos.filter(x => x !== v); (r.videos = r.videos || []).unshift(v); dirty.add(old.id); }
+      r.updated = Date.now(); dirty.add(r.id); save(); toast('נשמר');
+    }
+    closeDlg(); refresh();
+  }
+
+  /* ---------- register views, sections, navigation ---------- */
+  $('#content').insertAdjacentHTML('beforeend', '<section class="view" id="v-board" hidden></section><section class="view" id="v-videos" hidden></section><section class="view" id="v-tools" hidden></section>');
+  VIEWS.board = ['לוח בקרה', () => 'KEYVIEW', () => renderBoard()];
+  VIEWS.videos = ['כל הסרטונים', () => 'מהבריף ועד המוכן', () => renderVideos()];
+  VIEWS.tools = ['כלים מתקדמים', () => 'כל היכולות של המערכת', () => renderTools()];
+  VIEWS.projects[0] = 'לקוחות'; VIEWS.projects[1] = () => 'הלקוחות שלך';
+  VIEWS.home[0] = 'סרטוני הדגמה'; VIEWS.home[1] = () => 'הסרטים הראשונים של המערכת';
+  const OWN = ['board', 'videos', 'projects', 'media', 'data'];
+  SECTIONS.length = 0;
+  SECTIONS.push(
+    { id: 'board', n: 'לוח בקרה', d: 'הכול במבט אחד', ic: 'home', views: ['board'] },
+    { id: 'videos', n: 'כל הסרטונים', d: 'מהבריף ועד המוכן', ic: 'film', views: ['videos'] },
+    { id: 'clients', n: 'לקוחות', d: 'סביבה לכל לקוח', ic: 'users', views: ['projects'] },
+    { id: 'media', n: 'ספריית מדיה', d: 'וידאו, תמונות והדמיות', ic: 'image', views: ['media'] },
+    { id: 'data', n: 'ניהול נתונים', d: 'גיבוי ושחזור', ic: 'db', views: ['data'] },
+    { id: 'tools', n: 'כלים מתקדמים', d: 'עורך, 3D, קמפיינים, לידים', ic: 'gear', views: Object.keys(VIEWS).filter(k => !OWN.includes(k)) });
+
+  renderNav = function () {
+    const sec = secOf(view), vids = allVideos(), rev = vids.filter(x => x.v.status === 'review').length, ncl = realClients().length;
+    const cur = id => sec.id === id ? ' aria-current="page"' : '';
+    $('#nav').innerHTML = `
+      <button class="ni" data-go="board"${cur('board')}>${ic('home')}<span>לוח בקרה<small>הכול במבט אחד</small></span></button>
+      <button class="ni kv-new" data-kv-new="reel">${ic('spark')}<span>סרטון חדש<small>התחל הפקה</small></span></button>
+      <button class="ni" data-go="videos"${cur('videos')}>${ic('film')}<span>כל הסרטונים<small>מהבריף ועד המוכן</small></span>${rev ? `<span class="new">${rev}</span>` : ''}</button>
+      <button class="ni" data-go="projects"${cur('clients')}>${ic('users')}<span>לקוחות<small>סביבה לכל לקוח</small></span>${ncl ? `<span class="n">${ncl}</span>` : ''}</button>
+      <button class="ni" data-go="media"${cur('media')}>${ic('image')}<span>ספריית מדיה<small>וידאו, תמונות והדמיות</small></span></button>
+      <div class="sep"></div>
+      <button class="ni" data-go="tools"${cur('tools')}>${ic('gear')}<span>כלים מתקדמים<small>עורך, 3D, קמפיינים, לידים</small></span></button>
+      <button class="ni" data-go="data"${cur('data')}>${ic('db')}<span>ניהול נתונים<small>גיבוי ושחזור</small></span></button>`;
+    $('#tabbar').innerHTML = [['board', 'בקרה', 'home', 'board'], ['videos', 'סרטונים', 'film', 'videos'], ['', 'חדש', 'spark', ''], ['projects', 'לקוחות', 'users', 'clients'], ['tools', 'כלים', 'gear', 'tools']]
+      .map(([g, n, i, s]) => g ? `<button data-go="${g}" ${sec.id === s ? 'aria-current="page"' : ''}>${ic(i)}${n}</button>` : `<button class="kv-tb-new" data-kv-new="reel">${ic(i)}${n}</button>`).join('');
+    $('#subtabs').innerHTML = sec.id === 'tools' && view !== 'tools' ? `<button class="st" data-go="tools">← כלים מתקדמים</button>` : '';
+  };
+  const _rc = renderChrome;
+  renderChrome = function () {
+    _rc.apply(this, arguments);
+    const free = ['board', 'videos', 'projects', 'tools', 'data', 'home'].includes(view);
+    $('#pswitch').hidden = free; if (free) $('#pmenu').hidden = true;
+    const st = $('#topStage'); if (st && free) st.hidden = true;
+    const ey = $('#crumbEy'); if (ey && ['board', 'videos', 'tools'].includes(view)) ey.textContent = 'KEYVIEW · STUDIO';
+  };
+  const _g = go;
+  go = function (v) {
+    _g.apply(this, arguments);
+    const b = $('#tband'); if (b && ['board', 'videos', 'projects', 'tools'].includes(view)) b.hidden = true;
+    const hv = $('#v-board video'); if (hv) { if (view === 'board' && !reduced.matches) hv.play().catch(() => { }); else hv.pause(); }
+  };
+  const _rp = renderProjects;
+  renderProjects = function () {
+    _rp.apply(this, arguments);
+    $$('#projGrid .pcard').forEach(c => { const id = c.querySelector('[data-open]')?.dataset.open, r = S.projects.find(p => p.id === id); if (r && isPh(r)) c.remove(); });
+    const nb = $('#showNewProj b'); if (nb) nb.textContent = 'לקוח חדש';
+    const h = $('#newProj .panel-h h2'); if (h && h.lastChild && h.lastChild.nodeType === 3) h.lastChild.textContent = 'לקוח חדש';
+  };
+  const _cp = createProject;
+  createProject = function () {
+    const n = S.projects.length; _cp.apply(this, arguments);
+    if (S.projects.length > n) { S.projects = S.projects.filter(p => !isPh(p)); if (!S.projects.some(p => p.id === S.active)) S.active = S.projects[S.projects.length - 1].id; save(); renderChrome(); }
+  };
+  const nb = $('.top-act .btn.ai'); if (nb) { nb.removeAttribute('data-go'); nb.setAttribute('data-kv-new', 'reel'); }
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', e => {
+    const n = e.target.closest('[data-kv-new]'); if (n) { e.preventDefault(); document.body.classList.remove('drawer'); openDlg({ type: n.dataset.kvNew }); return; }
+    const ed = e.target.closest('[data-kv-edit]'); if (ed) { const [rid, vid] = ed.dataset.kvEdit.split(':'); openDlg({ rid, vid }); return; }
+    const cl = e.target.closest('[data-kv-client]'); if (cl) { switchProject(cl.dataset.kvClient, 'overview'); return; }
+    if (e.target.closest('[data-kv-addclient]')) { closeDlg(); go('projects'); const b = $('#showNewProj'); if (b) b.click(); return; }
+    const vf = e.target.closest('[data-kv-vf]'); if (vf) { VF.st = vf.dataset.kvVf; VF.cl = 'all'; go('videos'); return; }
+    const st = e.target.closest('[data-kv-st]'); if (st) { VF.st = st.dataset.kvSt; renderVideos(); return; }
+  });
+  document.addEventListener('change', e => {
+    if (e.target.id === 'kvVFClient') { VF.cl = e.target.value; renderVideos(); }
+    else if (e.target.id === 'kvToolClient') switchProject(e.target.value, 'tools');
+  });
+
+  /* ---------- start ---------- */
+  migrate();
+  const sv = (location.hash || '').replace('#', '');
+  go(VIEWS[sv] && sv !== 'home' ? sv : 'board');
 })();
 
 </script>
