@@ -1405,6 +1405,56 @@ button.kv-empty:hover{background:var(--gold-soft)}
   .kv-dlg{place-items:end center;padding:0}.kv-dlg-p{border-radius:18px 18px 0 0;width:100%}
 }
 @media (prefers-reduced-motion:reduce){.kv-card{transition:none}}
+/* ---- reel flow ---- */
+#v-reel{display:block}#v-reel[hidden]{display:none!important}
+.kv-rf-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kv-crumb{color:var(--ink-3);font-size:13px}.kv-crumb b{color:var(--ink)}
+.kv-rf-acts{margin-inline-start:auto}
+.kv-rf-h{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;margin:8px 0 16px}
+.kv-stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
+.kv-st{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:9px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;font-weight:600;color:var(--ink-3);min-width:0}
+.kv-st .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--line-2);font-size:12.5px;flex:none}
+.kv-st .n svg.i{width:13px;height:13px}
+.kv-st .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kv-st.on{border-color:var(--sun);color:var(--ink);box-shadow:var(--shadow)}.kv-st.on .n{background:var(--sun);color:#fff}
+.kv-st.done{color:var(--ink-2)}.kv-st.done .n{background:var(--good);color:#fff}
+.kv-st:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.grid2.wide{grid-template-columns:minmax(0,1fr)}
+@media(min-width:1000px){.grid2.wide{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
+.kv-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.kv-hooks{display:grid;gap:8px}
+.kv-hook{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:4px 6px 4px 10px}
+.kv-hook.sel{border-color:var(--sun);background:var(--sun-soft)}
+.kv-hook .main{all:unset;box-sizing:border-box;flex:1;min-width:0;cursor:pointer;display:flex;gap:10px;align-items:center;padding:8px 2px;font-size:14.5px;line-height:1.4}
+.kv-hook .main:focus-visible{outline:2px solid var(--sun);outline-offset:2px;border-radius:8px}
+.kv-hook .r{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);flex:none}.kv-hook.sel .r{border-color:var(--sun);background:radial-gradient(var(--sun) 45%,transparent 50%)}
+.kv-hook .tag{font-size:11.5px;font-weight:700;color:var(--ink-3);background:var(--line-2);border-radius:99px;padding:2px 9px;flex:none}
+.kv-hook .x{all:unset;cursor:pointer;width:28px;height:28px;display:grid;place-items:center;color:var(--ink-3);border-radius:8px;flex:none}.kv-hook .x:hover{background:var(--line-2)}
+.kv-hook .x:focus-visible{outline:2px solid var(--sun)}.kv-hook .x svg.i{width:14px;height:14px}
+.kv-meter{display:grid;gap:6px;font-size:12.5px;color:var(--ink-3)}
+.kv-meter .bar{height:6px;border-radius:99px;background:var(--line-2);overflow:hidden}.kv-meter .bar i{display:block;height:100%;background:var(--sun);border-radius:99px}
+.kv-phone{position:relative;width:min(220px,60%);aspect-ratio:9/16;margin:0 auto;border-radius:22px;overflow:hidden;background:#0b1820 center/cover;background-image:linear-gradient(160deg,var(--c,#0B3B4C),#0b1820);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;box-shadow:var(--shadow);isolation:isolate}
+.kv-phone::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,18,25,.85),rgba(8,18,25,.1) 65%);z-index:-1}
+.kv-phone .tg{position:absolute;top:10px;right:10px;font-size:10.5px;background:rgba(255,255,255,.18);border-radius:99px;padding:2px 9px}
+.kv-phone .cap{font-weight:700;font-size:16px;line-height:1.25;text-align:center}.kv-phone .sub{text-align:center;font-size:11px;opacity:.75;margin-top:8px}
+.kv-chk{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.kv-chk li{display:flex;gap:12px;align-items:flex-start}
+.kv-chk .n{width:26px;height:26px;border-radius:50%;background:var(--line-2);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none;color:var(--ink-2)}
+.kv-chk li.done .n{background:var(--good);color:#fff}.kv-chk .n svg.i{width:14px;height:14px}
+.kv-drop{display:grid;place-items:center;gap:4px;text-align:center;border:1.5px dashed var(--gold-line);border-radius:14px;padding:18px 12px;margin-top:8px;cursor:pointer;background:var(--gold-soft);color:var(--gold-2)}
+.kv-drop:hover{background:#F3EAD6}.kv-drop svg.i{width:22px;height:22px}
+.kv-clip{display:grid;gap:8px;margin-top:8px}.kv-clip video{width:min(220px,100%);aspect-ratio:9/16;border-radius:14px;background:#000;object-fit:cover}
+.kv-media{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.kv-media button{all:unset;cursor:pointer;aspect-ratio:1;border-radius:10px;background:#0b1820 center/cover;border:2px solid transparent;box-sizing:border-box}
+.kv-media button.on{border-color:var(--sun);box-shadow:0 0 0 2px var(--sun-soft)}.kv-media button:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.kv-sw{display:flex;gap:12px;align-items:flex-start;cursor:pointer}.kv-sw input{width:20px;height:20px;margin-top:2px;accent-color:var(--sun)}
+.kv-sw span{display:grid;gap:2px}.kv-sw b{font-size:14.5px}
+.ni.kv-new[aria-current]{background:var(--sun-soft)}
+@media(max-width:720px){
+ .kv-stepper{display:flex;overflow-x:auto;margin:0 -16px 16px;padding:0 16px 4px;scroll-snap-type:x mandatory}.kv-st{flex:none;scroll-snap-align:start}
+ .kv-st:not(.on) .t{display:none}.kv-st:not(.on){padding:10px}
+ .kv-actions .btn{flex:1;justify-content:center}
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
@@ -9989,7 +10039,7 @@ Sentence: ${raw}`;
   function saveDlg() {
     const title = $('#kvTitle').value.trim(); if (!title) { toast('כתבו שם לסרטון'); $('#kvTitle').focus(); return; }
     const r = S.projects.find(p => p.id === $('#kvClient').value); if (!r) return;
-    if (!dlgState.vid) { addVideo(r, { title, type: dlgState.type }); toast('הסרטון נוסף כטיוטה'); }
+    if (!dlgState.vid) { const nv = addVideo(r, { title, type: dlgState.type }); closeDlg(); if (nv.type === 'reel') { openVideo(r.id, nv.id); return; } toast('הסרטון נוסף כטיוטה'); }
     else {
       const old = S.projects.find(p => p.id === dlgState.rid), v = old && (old.videos || []).find(x => x.id === dlgState.vid); if (!v) { closeDlg(); return; }
       const st = $('#kvStatus').value;
@@ -10002,16 +10052,18 @@ Sentence: ${raw}`;
   }
 
   /* ---------- register views, sections, navigation ---------- */
-  $('#content').insertAdjacentHTML('beforeend', '<section class="view" id="v-board" hidden></section><section class="view" id="v-videos" hidden></section><section class="view" id="v-tools" hidden></section>');
+  $('#content').insertAdjacentHTML('beforeend', '<section class="view" id="v-board" hidden></section><section class="view" id="v-videos" hidden></section><section class="view" id="v-tools" hidden></section><section class="view" id="v-reel" hidden></section>');
   VIEWS.board = ['לוח בקרה', () => 'KEYVIEW', () => renderBoard()];
   VIEWS.videos = ['כל הסרטונים', () => 'מהבריף ועד המוכן', () => renderVideos()];
   VIEWS.tools = ['כלים מתקדמים', () => 'כל היכולות של המערכת', () => renderTools()];
+  VIEWS.reel = ['סרטון חדש', () => 'מהבריף ועד המוכן', () => renderReel()];
   VIEWS.projects[0] = 'לקוחות'; VIEWS.projects[1] = () => 'הלקוחות שלך';
   VIEWS.home[0] = 'סרטוני הדגמה'; VIEWS.home[1] = () => 'הסרטים הראשונים של המערכת';
-  const OWN = ['board', 'videos', 'projects', 'media', 'data'];
+  const OWN = ['board', 'videos', 'projects', 'media', 'data', 'reel'];
   SECTIONS.length = 0;
   SECTIONS.push(
     { id: 'board', n: 'לוח בקרה', d: 'הכול במבט אחד', ic: 'home', views: ['board'] },
+    { id: 'make', n: 'סרטון חדש', d: 'מהבריף ועד המוכן', ic: 'spark', views: ['reel'] },
     { id: 'videos', n: 'כל הסרטונים', d: 'מהבריף ועד המוכן', ic: 'film', views: ['videos'] },
     { id: 'clients', n: 'לקוחות', d: 'סביבה לכל לקוח', ic: 'users', views: ['projects'] },
     { id: 'media', n: 'ספריית מדיה', d: 'וידאו, תמונות והדמיות', ic: 'image', views: ['media'] },
@@ -10023,7 +10075,7 @@ Sentence: ${raw}`;
     const cur = id => sec.id === id ? ' aria-current="page"' : '';
     $('#nav').innerHTML = `
       <button class="ni" data-go="board"${cur('board')}>${ic('home')}<span>לוח בקרה<small>הכול במבט אחד</small></span></button>
-      <button class="ni kv-new" data-kv-new="reel">${ic('spark')}<span>סרטון חדש<small>התחל הפקה</small></span></button>
+      <button class="ni kv-new" data-kv-new="reel"${cur('make')}>${ic('spark')}<span>סרטון חדש<small>התחל הפקה</small></span></button>
       <button class="ni" data-go="videos"${cur('videos')}>${ic('film')}<span>כל הסרטונים<small>מהבריף ועד המוכן</small></span>${rev ? `<span class="new">${rev}</span>` : ''}</button>
       <button class="ni" data-go="projects"${cur('clients')}>${ic('users')}<span>לקוחות<small>סביבה לכל לקוח</small></span>${ncl ? `<span class="n">${ncl}</span>` : ''}</button>
       <button class="ni" data-go="media"${cur('media')}>${ic('image')}<span>ספריית מדיה<small>וידאו, תמונות והדמיות</small></span></button>
@@ -10037,7 +10089,7 @@ Sentence: ${raw}`;
   const _rc = renderChrome;
   renderChrome = function () {
     _rc.apply(this, arguments);
-    const free = ['board', 'videos', 'projects', 'tools', 'data', 'home'].includes(view);
+    const free = ['board', 'videos', 'projects', 'tools', 'data', 'home', 'reel'].includes(view);
     $('#pswitch').hidden = free; if (free) $('#pmenu').hidden = true;
     const st = $('#topStage'); if (st && free) st.hidden = true;
     const ey = $('#crumbEy'); if (ey && ['board', 'videos', 'tools'].includes(view)) ey.textContent = 'KEYVIEW · STUDIO';
@@ -10045,7 +10097,7 @@ Sentence: ${raw}`;
   const _g = go;
   go = function (v) {
     _g.apply(this, arguments);
-    const b = $('#tband'); if (b && ['board', 'videos', 'projects', 'tools'].includes(view)) b.hidden = true;
+    const b = $('#tband'); if (b && ['board', 'videos', 'projects', 'tools', 'reel'].includes(view)) b.hidden = true;
     const hv = $('#v-board video'); if (hv) { if (view === 'board' && !reduced.matches) hv.play().catch(() => { }); else hv.pause(); }
   };
   const _rp = renderProjects;
@@ -10062,10 +10114,225 @@ Sentence: ${raw}`;
   };
   const nb = $('.top-act .btn.ai'); if (nb) { nb.removeAttribute('data-go'); nb.setAttribute('data-kv-new', 'reel'); }
 
+  /* ---------- reel flow: brief → hook & script → production → polish → approval ----------
+     One flow per video type; the board, statuses and clients are shared. The data lives on video.flow. */
+  const REEL_STEPS = ['בריף', 'הוק ותסריט', 'הפקה', 'ליטוש', 'אישור וייצוא'];
+  const FORMATS = [
+    { id: 'talk', n: 'אווטאר מדבר', d: 'טיפ או הצעה, ישר למצלמה' },
+    { id: 'broll', n: 'אווטאר + B-roll', d: 'הדיבור מלווה בקטעים ובתמונות' }];
+  const WPS = 2.4; // Hebrew speech, words per second
+  let RF = null; try { RF = JSON.parse(sessionStorage.getItem('kv.rf') || 'null'); } catch (e) { }
+  const rfCur = () => { if (!RF) return {}; const r = S.projects.find(p => p.id === RF.rid), v = r && (r.videos || []).find(x => x.id === RF.vid); return { r, v }; };
+  const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+  const wc = s => (String(s || '').trim().match(/\S+/g) || []).length;
+  function flowOf(v, r) {
+    const f = v.flow = v.flow || {};
+    f.step = f.step || 1;
+    f.brief = f.brief || { topic: '', aud: (r.data.audience && r.data.audience[0]) || '', tone: r.data.tone || 'יוקרתי', offer: r.data.cta || '', format: 'talk', dur: 30 };
+    f.hooks = f.hooks || []; f.hookSel = f.hookSel || '';
+    f.script = f.script || { hook: '', body: '', cta: '' };
+    f.prod = f.prod || { broll: [] }; f.prod.broll = f.prod.broll || [];
+    f.polish = f.polish || { captions: true, music: 'none', endcard: true };
+    return f;
+  }
+  function openVideo(rid, vid) {
+    const r = S.projects.find(p => p.id === rid), v = r && (r.videos || []).find(x => x.id === vid); if (!v) return;
+    if (v.type !== 'reel') { openDlg({ rid, vid }); return; }
+    RF = { rid, vid }; try { sessionStorage.setItem('kv.rf', JSON.stringify(RF)); } catch (e) { }
+    flowOf(v, r); go('reel');
+  }
+  const persist = () => { const { r, v } = rfCur(); if (v) { v.updated = Date.now(); r.updated = Date.now(); dirty.add(r.id); save(); } };
+  const persistSoon = debounce(persist, 400);
+  const setPath = (o, path, val) => { const k = path.split('.'); let t = o; k.slice(0, -1).forEach(x => { t = t[x] = t[x] || {}; }); t[k[k.length - 1]] = val; };
+
+  /* clips live in IndexedDB (a phone video is too big for localStorage) */
+  const CLIPS = new Map();
+  const idb = {
+    db: null,
+    open() { return this.db ? Promise.resolve(this.db) : new Promise(res => { try { const q = indexedDB.open('keyview-clips', 1); q.onupgradeneeded = () => q.result.createObjectStore('clips'); q.onsuccess = () => { this.db = q.result; res(this.db); }; q.onerror = () => res(null); } catch (e) { res(null); } }); },
+    async put(k, blob) { const db = await this.open(); if (!db) return false; return new Promise(res => { const t = db.transaction('clips', 'readwrite'); t.objectStore('clips').put(blob, k); t.oncomplete = () => res(true); t.onerror = () => res(false); }); },
+    async get(k) { const db = await this.open(); if (!db) return null; return new Promise(res => { const q = db.transaction('clips').objectStore('clips').get(k); q.onsuccess = () => res(q.result || null); q.onerror = () => res(null); }); },
+    async del(k) { const db = await this.open(); if (!db) return; return new Promise(res => { const t = db.transaction('clips', 'readwrite'); t.objectStore('clips').delete(k); t.oncomplete = () => res(); t.onerror = () => res(); }); }
+  };
+  async function clipUrl(key) { if (CLIPS.has(key)) return CLIPS.get(key); const b = await idb.get(key); if (!b) return ''; const u = URL.createObjectURL(b); CLIPS.set(key, u); return u; }
+  const readDur = url => new Promise(res => { const el = document.createElement('video'); el.preload = 'metadata'; el.muted = true; el.onloadedmetadata = () => res(isFinite(el.duration) ? el.duration : 0); el.onerror = () => res(0); el.src = url; });
+
+  /* prompts to paste into a Claude chat (until the server is connected) */
+  const briefLines = (r, f) => [`הלקוח: ${r.data.name}${r.data.clientType ? ` (${r.data.clientType})` : ''}${r.data.city ? `, ${r.data.city}` : ''}`, `טון: ${f.brief.tone}`, `קהל יעד: ${f.brief.aud || 'כללי'}`, `נושא הרילס: ${f.brief.topic || '(לא הוגדר)'}`, `הצעה וקריאה לפעולה: ${f.brief.offer || '(לא הוגדרה)'}`].join('\n');
+  const hooksPrompt = (r, f) => `אתה קופירייטר לרילסים בעברית. כתוב 10 הוקים (משפט פתיחה של עד 3 שניות) לרילס.\n\n${briefLines(r, f)}\n\nלכל הוק השתמש בנוסחה אחרת מתוך: סקרנות, מספר, כאב, הפרכה, סיפור, דחיפות, יתרון, שאלה.\nכללים: עברית מדוברת וטבעית, עד 12 מילים להוק, בלי הבטחות שאי אפשר לעמוד בהן, בלי מספרים, אחוזים או תשואות שלא נתתי לך, ובלי ציטוטים בדויים של לקוחות.\nפורמט: שורה אחת לכל הוק, בצורה: נוסחה | טקסט ההוק. בלי מספור ובלי הסברים.`;
+  const scriptPrompt = (r, f) => `כתוב תסריט לרילס בעברית באורך ${f.brief.dur} שניות (בערך ${Math.round(f.brief.dur * WPS)} מילים), בקול מדבר וטבעי.\n\n${briefLines(r, f)}\nההוק (נתון, אל תשנה): ${f.script.hook || '(בחר הוק קודם)'}\n\nמבנה: הוק, גוף, קריאה לפעולה. בלי הבטחות שאי אפשר לעמוד בהן ובלי נתונים שלא נתתי לך.\nפורמט: שלוש שורות בדיוק:\nהוק | ...\nגוף | ...\nקריאה | ...`;
+  const prodSettings = (r, f) => `תסריט לקריאה:\n${[f.script.hook, f.script.body, f.script.cta].filter(Boolean).join('\n')}\n\nהגדרות: פורמט אנכי 9:16 (1080×1920), רקע נקי, דיבור בעברית, בלי כתוביות ובלי מוזיקה (מוסיפים במערכת), אורך עד ${f.brief.dur + 5} שניות.`;
+  function parseHooks(txt) {
+    const out = [];
+    String(txt || '').split(/\n+/).forEach(line => {
+      const s = line.replace(/^\s*(?:[-–•*]+|\d+[.)])\s*/, '').trim(); if (!s) return;
+      let tag = 'אחר', text = s; const m = s.match(/^([^|]{1,14})\|\s*(.+)$/);
+      if (m) { tag = m[1].replace(/[*_]/g, '').trim() || 'אחר'; text = m[2].trim(); }
+      text = text.replace(/^["“”'׳״]+|["“”'׳״]+$/g, '').trim(); if (text.length < 4) return;
+      out.push({ id: 'h' + uid(), tag, text });
+    });
+    return out;
+  }
+  function parseScript(txt) {
+    const res = { hook: '', body: '', cta: '' }; let key = '';
+    String(txt || '').split(/\n/).forEach(line => {
+      const m = line.match(/^\s*[*_]*(הוק|גוף|קריאה(?: לפעולה)?)[*_]*\s*[|:]\s*(.*)$/);
+      if (m) { key = m[1] === 'הוק' ? 'hook' : m[1] === 'גוף' ? 'body' : 'cta'; res[key] = m[2].trim(); }
+      else if (key && line.trim()) res[key] += (res[key] ? ' ' : '') + line.trim();
+    });
+    return res;
+  }
+
+  /* ---------- the wizard ---------- */
+  const fmtT = s => { s = Math.max(0, Math.round(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  function stepBrief(f, r) {
+    const b = f.brief, auds = [...new Set([...(r.data.audience || []), ...AUD])];
+    return `<div class="panel"><div class="panel-h"><h2>הבריף</h2><span class="hint">שלוש דקות, ומכאן נגזר הכול</span></div><div class="panel-b form" style="grid-template-columns:1fr">
+      <div class="f"><label for="rfTopic">על מה הרילס?</label><textarea class="in" id="rfTopic" data-rf="brief.topic" placeholder="לדוגמה: למה כדאי לשאול את היזם על לוחות זמנים לפני חתימה">${esc(b.topic)}</textarea></div>
+      <div class="f"><label for="rfAud">קהל יעד</label><select class="in" id="rfAud" data-rf="brief.aud">${auds.map(a => `<option ${a === b.aud ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>
+      <div class="f"><label for="rfTone">טון</label><select class="in" id="rfTone" data-rf="brief.tone">${TONES.map(t => `<option ${t === b.tone ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select></div>
+      <div class="f"><label for="rfOffer">הצעה וקריאה לפעולה</label><input class="in" id="rfOffer" data-rf="brief.offer" value="${esc(b.offer)}" placeholder="לדוגמה: השאירו פרטים לקבלת רשימת השאלות"></div>
+      <div class="f"><label>פורמט</label><div class="kv-chips">${FORMATS.map(x => `<button type="button" class="kv-chip" data-rf-set="brief.format:${x.id}" aria-pressed="${b.format === x.id}" title="${esc(x.d)}">${x.n}</button>`).join('')}</div></div>
+      <div class="f"><label>אורך</label><div class="kv-chips">${[15, 30, 45].map(d => `<button type="button" class="kv-chip" data-rf-set="brief.dur:${d}" aria-pressed="${b.dur === d}">${d} שניות</button>`).join('')}</div></div>
+    </div></div>`;
+  }
+  function previewCard(r, f) {
+    const cv = coverOf(r), txt = f.script.hook || '';
+    return `<div class="kv-phone" id="rfPhone" style="${cv ? `background-image:url('${esc(cv)}')` : `--c:${esc(r.data.primary || '#0B3B4C')}`}"><span class="tg">תצוגה מקדימה</span><div class="cap" id="rfCap">${txt ? esc(txt) : '<span style="opacity:.6">ההוק יופיע כאן</span>'}</div><div class="sub">${esc(isPh(r) ? '' : r.data.name)}${r.data.city ? ' · ' + esc(r.data.city) : ''}</div></div>`;
+  }
+  function stepHooks(f, r) {
+    const hooks = f.hooks.map(h => `<div class="kv-hook ${h.id === f.hookSel ? 'sel' : ''}"><button type="button" class="main" data-rf-hook="${h.id}"><span class="r"></span><b>${esc(h.text)}</b></button><span class="tag">${esc(h.tag)}</span><button type="button" class="x" data-rf-hookdel="${h.id}" aria-label="מחיקת הוק">${ic('x')}</button></div>`).join('');
+    const w = wc([f.script.hook, f.script.body, f.script.cta].join(' ')), secs = w / WPS, pct = Math.min(100, Math.round(secs / f.brief.dur * 100));
+    return `<div class="grid2 wide"><div style="display:grid;gap:18px;min-width:0;align-content:start">
+      <div class="panel"><div class="panel-h"><h2>בנק הוקים</h2><span class="hint">${f.hooks.length ? f.hooks.length + ' הוקים' : 'עוד אין הוקים'}</span>
+        <div class="sp"><button type="button" class="btn sm" data-rf-copy="hooks">${ic('copy')}העתק פרומפט ל-Claude</button><button type="button" class="btn sm" data-rf-pastetoggle="hooks">${ic('copy')}הדבק הוקים</button><button type="button" class="btn sm" disabled>${ic('spark')}כתוב אוטומטית · בקרוב</button></div></div>
+        <div class="panel-b" style="display:grid;gap:12px">
+          <div class="banner info">${ic('spark')}<div>הפרומפט כבר כולל את הבריף. מעתיקים אותו ל-Claude, ומדביקים כאן את מה שחוזר, שורה לכל הוק.</div></div>
+          ${RF.paste === 'hooks' ? `<div class="f"><label for="rfPasteH">הדבק כאן את ההוקים</label><textarea class="in" id="rfPasteH" placeholder="סקרנות | יש דבר אחד שרוב הקונים לא שואלים&#10;מספר | 3 שאלות לפני חתימה"></textarea></div><div class="row"><button type="button" class="btn sm sun" data-rf-addhooks>הוסף לבנק</button><button type="button" class="btn sm ghost" data-rf-pastetoggle="">ביטול</button></div>` : ''}
+          <div class="kv-hooks">${hooks || '<div class="kv-empty">הבנק ריק. העתק את הפרומפט, ואז הדבק את ההוקים.</div>'}</div>
+        </div></div></div>
+      <div style="display:grid;gap:18px;min-width:0;align-content:start">
+        <div class="panel"><div class="panel-h"><h2>תסריט</h2><span class="hint">ניתן לעריכה</span><div class="sp"><button type="button" class="btn sm" data-rf-copy="script">${ic('copy')}העתק פרומפט</button><button type="button" class="btn sm" data-rf-pastetoggle="script">${ic('copy')}הדבק תסריט</button></div></div>
+          <div class="panel-b" style="display:grid;gap:10px">
+            ${RF.paste === 'script' ? `<div class="f"><label for="rfPasteS">הדבק את התסריט (הוק | גוף | קריאה)</label><textarea class="in" id="rfPasteS"></textarea></div><div class="row"><button type="button" class="btn sm sun" data-rf-addscript>החל על התסריט</button><button type="button" class="btn sm ghost" data-rf-pastetoggle="">ביטול</button></div>` : ''}
+            <div class="f"><label for="rfSH">הוק · 0-3 שניות</label><textarea class="in" id="rfSH" data-rf="script.hook" rows="2" style="min-height:64px">${esc(f.script.hook)}</textarea></div>
+            <div class="f"><label for="rfSB">גוף</label><textarea class="in" id="rfSB" data-rf="script.body" rows="4">${esc(f.script.body)}</textarea></div>
+            <div class="f"><label for="rfSC">קריאה לפעולה</label><textarea class="in" id="rfSC" data-rf="script.cta" rows="2" style="min-height:64px">${esc(f.script.cta)}</textarea></div>
+            <div class="kv-meter"><span id="rfMeter">${w} מילים · כ-${Math.round(secs)} שניות מתוך ${f.brief.dur}</span><span class="bar"><i id="rfBar" style="width:${pct}%"></i></span></div>
+          </div></div>
+        <div class="panel"><div class="panel-b">${previewCard(r, f)}</div></div></div></div>`;
+  }
+  function stepProd(f, r, v) {
+    const assets = (r.assets || []).filter(a => a.src && !a.vector);
+    const clip = f.prod.clip;
+    return `<div class="grid2 wide"><div class="panel"><div class="panel-h"><h2>הפקת האווטאר</h2><span class="hint">מהתסריט לקליפ מדבר</span></div><div class="panel-b" style="display:grid;gap:14px">
+        <ul class="kv-chk">
+          <li class="done"><span class="n">${ic('check')}</span><div><b>התסריט מוכן</b><div class="hint">${wc([f.script.hook, f.script.body, f.script.cta].join(' '))} מילים</div></div></li>
+          <li><span class="n">1</span><div><b>העתק את ההגדרות לכלי האווטאר</b><div class="hint">תסריט, פורמט 9:16 ובלי כתוביות</div><button type="button" class="btn sm" style="margin-top:6px" data-rf-copy="prod">${ic('copy')}העתק הגדרות</button></div></li>
+          <li><span class="n">2</span><div><b>צור את הקליפ בכלי והורד אותו</b><div class="hint">את הכתוביות והמוזיקה מוסיפים כאן</div></div></li>
+          <li class="${clip ? 'done' : ''}"><span class="n">${clip ? ic('check') : 3}</span><div style="min-width:0;flex:1"><b>העלה את הקליפ לכאן</b>
+            ${clip ? `<div class="kv-clip"><video id="rfVid" controls playsinline muted preload="metadata"></video><div class="hint">${esc(clip.name)} · ${fmtT(clip.dur || 0)}</div><div class="row"><label class="btn sm" for="rfClip">החלפה</label><button type="button" class="btn sm ghost" data-rf-clipdel>הסרה</button></div></div>`
+        : `<label class="kv-drop" for="rfClip">${ic('up')}<b>בחר קליפ מהמכשיר</b><span class="hint">MP4 או MOV · עד כדקה</span></label>`}
+            <input type="file" id="rfClip" accept="video/*" class="sr"></div></li>
+        </ul>
+        <button type="button" class="btn" disabled>${ic('spark')}הפקה אוטומטית · בקרוב</button></div></div>
+      <div class="panel"><div class="panel-h"><h2>קטעי B-roll</h2><span class="hint">מהמדיה של הלקוח</span></div><div class="panel-b" style="display:grid;gap:10px">
+        ${assets.length ? `<div class="kv-media">${assets.slice(0, 24).map(a => `<button type="button" class="${f.prod.broll.includes(a.id) ? 'on' : ''}" data-rf-broll="${esc(a.id)}" style="background-image:url('${esc(a.src)}')" aria-pressed="${f.prod.broll.includes(a.id)}" aria-label="${esc(a.name || 'תמונה')}"></button>`).join('')}</div><div class="hint">${f.prod.broll.length} נבחרו. יופיעו מעל האווטאר בזמנים שייקבעו בשלב הליטוש.</div>`
+        : `<div class="kv-empty">עוד אין מדיה ללקוח הזה.</div><button type="button" class="btn sm" data-go="media">${ic('upload')}להעלאת מדיה</button>`}
+      </div></div></div>`;
+  }
+  function stepPolish(f) {
+    const p = f.polish;
+    return `<div class="panel" style="max-width:640px"><div class="panel-h"><h2>הגדרות ליטוש</h2><span class="hint">נשמרות לסרטון</span></div><div class="panel-b" style="display:grid;gap:14px">
+      <label class="kv-sw"><input type="checkbox" data-rfc="polish.captions" ${p.captions ? 'checked' : ''}><span><b>כתוביות בעברית</b><span class="hint">מילה אחר מילה, לפי התסריט</span></span></label>
+      <div class="f"><label for="rfMusic">מוזיקה</label><select class="in" id="rfMusic" data-rf="polish.music">${Object.entries(MUSIC).map(([k, m]) => `<option value="${k}" ${p.music === k ? 'selected' : ''}>${esc(m.n)}</option>`).join('')}</select></div>
+      <label class="kv-sw"><input type="checkbox" data-rfc="polish.endcard" ${p.endcard ? 'checked' : ''}><span><b>כרטיס סיום</b><span class="hint">שם הלקוח, קריאה לפעולה וטלפון</span></span></label>
+      <div class="banner">${ic('film')}<div>הרנדור וייצוא הקובץ המוכן מגיעים בשלב הבא של הפיתוח. ההגדרות כאן נשמרות ויופעלו אוטומטית.</div></div></div></div>`;
+  }
+  function stepApprove(f, r, v) {
+    const w = wc([f.script.hook, f.script.body, f.script.cta].join(' ')), rows = [
+      [!!f.script.hook, 'הוק נבחר'], [w > 15, `תסריט (${w} מילים)`], [!!f.prod.clip, 'קליפ אווטאר הועלה'], [f.prod.broll.length > 0, `${f.prod.broll.length} קטעי B-roll`]];
+    return `<div class="panel" style="max-width:640px"><div class="panel-h"><h2>אישור וייצוא</h2><span class="pill ${stOf(v.status).pill}">${stOf(v.status).label}</span></div><div class="panel-b" style="display:grid;gap:14px">
+      <ul class="kv-chk">${rows.map(([ok, t]) => `<li class="${ok ? 'done' : ''}"><span class="n">${ok ? ic('check') : '·'}</span><div><b>${t}</b></div></li>`).join('')}</ul>
+      <div class="row"><button type="button" class="btn sun" data-rf-status="review">${ic('send')}שליחה לאישור</button><button type="button" class="btn" data-rf-status="done">${ic('check')}סימון כמוכן</button><button type="button" class="btn ghost" data-rf-status="prod">חזרה להפקה</button></div>
+      <div class="banner">${ic('down')}<div>ייצוא קובץ MP4 מוכן מגיע בשלב הבא של הפיתוח.</div></div></div></div>`;
+  }
+  function renderReel() {
+    const el = $('#v-reel'), { r, v } = rfCur();
+    if (!v) { go('board'); return; }
+    const f = flowOf(v, r), st = f.step;
+    el.innerHTML = `<div class="kv-rf-top"><span class="kv-crumb">סרטון חדש · <b>${tyOf(v.type).n}</b>${isPh(r) ? '' : ' · ' + esc(r.data.name)}</span><span class="kv-rf-acts"><button type="button" class="btn sm" data-rf-details>פרטים</button></span></div>
+      <h1 class="kv-rf-h">${esc(v.title)}</h1>
+      <div class="kv-stepper">${REEL_STEPS.map((n, i) => { const k = i + 1; return `<button type="button" class="kv-st ${k < st ? 'done' : k === st ? 'on' : ''}" data-rf-step="${k}"><span class="n">${k < st ? ic('check') : k}</span><span class="t">${n}</span></button>`; }).join('')}</div>
+      <div class="kv-rf-body">${[stepBrief, stepHooks, stepProd, stepPolish, stepApprove][st - 1](f, r, v)}</div>
+      <div class="kv-actions">${st > 1 ? `<button type="button" class="btn" data-rf-nav="-1">→ חזרה</button>` : '<span></span>'}${st < 5 ? `<button type="button" class="btn sun" data-rf-nav="1">${['המשך להוק ותסריט', 'המשך להפקה', 'המשך לליטוש', 'המשך לאישור'][st - 1]} ←</button>` : ''}</div>`;
+    if (st === 3 && f.prod.clip) clipUrl(v.id).then(u => { const vd = $('#rfVid'); if (vd && u) vd.src = u; });
+  }
+  function goStep(k) {
+    const { r, v } = rfCur(); if (!v) return; const f = flowOf(v, r);
+    if (k > f.step) {
+      if (f.step === 1 && !f.brief.topic.trim()) { toast('כתבו על מה הרילס'); $('#rfTopic') && $('#rfTopic').focus(); return; }
+      if (f.step === 2 && !f.script.hook.trim()) { toast('בחרו הוק או כתבו אחד'); return; }
+    }
+    f.step = Math.max(1, Math.min(5, k)); RF.paste = '';
+    if (f.step >= 3 && v.status === 'draft') v.status = 'prod';
+    persist(); renderChrome(); renderReel(); window.scrollTo({ top: 0 });
+  }
+  function updateScriptMeta() {
+    const { r, v } = rfCur(); if (!v) return; const f = flowOf(v, r);
+    const w = wc([f.script.hook, f.script.body, f.script.cta].join(' ')), secs = w / WPS;
+    const m = $('#rfMeter'), b = $('#rfBar'), c = $('#rfCap');
+    if (m) m.textContent = `${w} מילים · כ-${Math.round(secs)} שניות מתוך ${f.brief.dur}`;
+    if (b) b.style.width = Math.min(100, Math.round(secs / f.brief.dur * 100)) + '%';
+    if (c) c.innerHTML = f.script.hook ? esc(f.script.hook) : '<span style="opacity:.6">ההוק יופיע כאן</span>';
+  }
+  $('#v-reel').addEventListener('input', e => {
+    const p = e.target.dataset && e.target.dataset.rf; if (!p) return;
+    const { r, v } = rfCur(); if (!v) return; const f = flowOf(v, r);
+    setPath(f, p, e.target.value); if (p.startsWith('script.')) { const h = f.hooks.find(x => x.id === f.hookSel); if (h && p === 'script.hook' && e.target.value !== h.text) f.hookSel = ''; updateScriptMeta(); }
+    persistSoon();
+  });
+  $('#v-reel').addEventListener('change', async e => {
+    const t = e.target, { r, v } = rfCur(); if (!v) return; const f = flowOf(v, r);
+    if (t.dataset.rfc) { setPath(f, t.dataset.rfc, t.checked); persistSoon(); return; }
+    if (t.id === 'rfClip' && t.files && t.files[0]) {
+      const file = t.files[0]; if (!/^video\//.test(file.type) && !/\.(mp4|mov|m4v|webm)$/i.test(file.name)) { toast('בחרו קובץ וידאו'); return; }
+      toast('שומר את הקליפ…'); const ok = await idb.put(v.id, file);
+      if (!ok) { toast('אי אפשר לשמור את הקליפ במכשיר הזה'); return; }
+      if (CLIPS.has(v.id)) { URL.revokeObjectURL(CLIPS.get(v.id)); CLIPS.delete(v.id); }
+      const u = await clipUrl(v.id); const dur = await readDur(u);
+      f.prod.clip = { name: file.name, size: file.size, dur }; persist(); renderReel(); toast('הקליפ נשמר');
+    }
+  });
+  $('#v-reel').addEventListener('click', async e => {
+    const t = e.target.closest('button'); if (!t) return; const d = t.dataset;
+    const { r, v } = rfCur(); if (!v) return; const f = flowOf(v, r);
+    if (d.rfStep) { goStep(+d.rfStep); return; }
+    if (d.rfNav) { goStep(f.step + +d.rfNav); return; }
+    if (d.rfDetails !== undefined) { openDlg({ rid: r.id, vid: v.id, force: true }); return; }
+    if (d.rfSet) { const [p, val] = d.rfSet.split(':'); setPath(f, p, /^\d+$/.test(val) ? +val : val); persist(); renderReel(); return; }
+    if (d.rfCopy) { copyText(d.rfCopy === 'hooks' ? hooksPrompt(r, f) : d.rfCopy === 'script' ? scriptPrompt(r, f) : prodSettings(r, f)); return; }
+    if (d.rfPastetoggle !== undefined) { RF.paste = d.rfPastetoggle; renderReel(); return; }
+    if (d.rfAddhooks !== undefined) {
+      const add = parseHooks($('#rfPasteH').value); if (!add.length) { toast('לא נמצאו הוקים בטקסט'); return; }
+      const have = new Set(f.hooks.map(h => h.text)); const fresh = add.filter(h => !have.has(h.text));
+      f.hooks = f.hooks.concat(fresh).slice(0, 40); RF.paste = ''; persist(); renderReel(); toast(`נוספו ${fresh.length} הוקים`); return;
+    }
+    if (d.rfAddscript !== undefined) {
+      const s = parseScript($('#rfPasteS').value); if (!s.hook && !s.body && !s.cta) { toast('לא נמצא תסריט בטקסט. השתמשו בשורות: הוק | גוף | קריאה'); return; }
+      f.script = { hook: s.hook || f.script.hook, body: s.body || f.script.body, cta: s.cta || f.script.cta }; RF.paste = ''; persist(); renderReel(); toast('התסריט עודכן'); return;
+    }
+    if (d.rfHook) { const h = f.hooks.find(x => x.id === d.rfHook); if (h) { f.hookSel = h.id; f.script.hook = h.text; persist(); renderReel(); } return; }
+    if (d.rfHookdel) { f.hooks = f.hooks.filter(x => x.id !== d.rfHookdel); if (f.hookSel === d.rfHookdel) f.hookSel = ''; persist(); renderReel(); return; }
+    if (d.rfBroll) { const i = f.prod.broll.indexOf(d.rfBroll); i < 0 ? f.prod.broll.push(d.rfBroll) : f.prod.broll.splice(i, 1); persist(); renderReel(); return; }
+    if (d.rfClipdel !== undefined) { await idb.del(v.id); if (CLIPS.has(v.id)) { URL.revokeObjectURL(CLIPS.get(v.id)); CLIPS.delete(v.id); } delete f.prod.clip; persist(); renderReel(); return; }
+    if (d.rfStatus) { v.status = d.rfStatus; if (d.rfStatus === 'done') v.doneAt = Date.now(); persist(); renderChrome(); renderReel(); toast(d.rfStatus === 'review' ? 'נשלח לאישור' : d.rfStatus === 'done' ? 'סומן כמוכן' : 'חזרה להפקה'); return; }
+  });
+
   /* ---------- events ---------- */
   document.addEventListener('click', e => {
     const n = e.target.closest('[data-kv-new]'); if (n) { e.preventDefault(); document.body.classList.remove('drawer'); openDlg({ type: n.dataset.kvNew }); return; }
-    const ed = e.target.closest('[data-kv-edit]'); if (ed) { const [rid, vid] = ed.dataset.kvEdit.split(':'); openDlg({ rid, vid }); return; }
+    const ed = e.target.closest('[data-kv-edit]'); if (ed) { const [rid, vid] = ed.dataset.kvEdit.split(':'); openVideo(rid, vid); return; }
     const cl = e.target.closest('[data-kv-client]'); if (cl) { switchProject(cl.dataset.kvClient, 'overview'); return; }
     if (e.target.closest('[data-kv-addclient]')) { closeDlg(); go('projects'); const b = $('#showNewProj'); if (b) b.click(); return; }
     const vf = e.target.closest('[data-kv-vf]'); if (vf) { VF.st = vf.dataset.kvVf; VF.cl = 'all'; go('videos'); return; }
