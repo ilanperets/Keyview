@@ -1405,6 +1405,14 @@ button.kv-empty:hover{background:var(--gold-soft)}
   .kv-dlg{place-items:end center;padding:0}.kv-dlg-p{border-radius:18px 18px 0 0;width:100%}
 }
 @media (prefers-reduced-motion:reduce){.kv-card{transition:none}}
+/* ---- carousel generator ---- */
+#v-car2{display:block}#v-car2[hidden]{display:none!important}
+.kv-pts{display:grid;gap:10px}.kv-pt{display:grid;grid-template-columns:1fr 34px;gap:6px;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--surface-2)}
+.kv-pt input,.kv-pt textarea{grid-column:1}.kv-pt .x{grid-column:2;grid-row:1;all:unset;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;color:var(--ink-3);border-radius:8px}.kv-pt .x:hover{background:var(--line-2)}.kv-pt .x:focus-visible{outline:2px solid var(--sun)}.kv-pt .x svg.i{width:14px;height:14px}
+.kv-cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;align-items:start}
+.kv-cs{display:grid;gap:8px}.kv-cs canvas{width:100%;height:auto;border-radius:12px;box-shadow:var(--shadow);background:#0a1a22;display:block}
+.kv-csb{display:flex;align-items:center;justify-content:space-between;color:var(--ink-3);font-size:13px}
+@media(max-width:720px){.kv-cgrid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;margin:0 -16px;padding:0 16px 8px;scroll-snap-type:x mandatory}.kv-cs{scroll-snap-align:start}}
 /* ---- reel flow ---- */
 #v-reel{display:block}#v-reel[hidden]{display:none!important}
 .kv-rf-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -9885,7 +9893,7 @@ Sentence: ${raw}`;
   const VT = [
     { id: 'reel', n: 'רילס / סטורי', en: 'REELS', d: 'אווטאר, הוק וכתוביות, עד 30 שניות', on: true, img: 'clips/l_spin.jpg' },
     { id: 'ad', n: 'פרסומת', en: 'AD', d: '15 עד 30 שניות, הוק והצעה', img: 'clips/x_towerspark.jpg' },
-    { id: 'carousel', n: 'קרוסלה / פוסט', en: 'CAROUSEL', d: 'חמישה שקפים לפיד', img: 'clips/v_balcony.jpg' },
+    { id: 'carousel', n: 'קרוסלה / פוסט / סטורי', en: 'CAROUSEL', d: 'הוק, נקודות וקריאה לפעולה', on: true, img: 'clips/v_balcony.jpg' },
     { id: 'project', n: 'סרטון פרויקט', en: 'PROJECT FILM', d: 'הדמיות, מיקום ותמהיל', img: 'clips/v_towers.jpg' }];
 
   /* ---------- clients & videos ---------- */
@@ -10039,7 +10047,7 @@ Sentence: ${raw}`;
   function saveDlg() {
     const title = $('#kvTitle').value.trim(); if (!title) { toast('כתבו שם לסרטון'); $('#kvTitle').focus(); return; }
     const r = S.projects.find(p => p.id === $('#kvClient').value); if (!r) return;
-    if (!dlgState.vid) { const nv = addVideo(r, { title, type: dlgState.type }); closeDlg(); if (nv.type === 'reel') { openVideo(r.id, nv.id); return; } toast('הסרטון נוסף כטיוטה'); }
+    if (!dlgState.vid) { const nv = addVideo(r, { title, type: dlgState.type }); closeDlg(); if (nv.type === 'reel' || nv.type === 'carousel') { openVideo(r.id, nv.id); return; } toast('הסרטון נוסף כטיוטה'); }
     else {
       const old = S.projects.find(p => p.id === dlgState.rid), v = old && (old.videos || []).find(x => x.id === dlgState.vid); if (!v) { closeDlg(); return; }
       const st = $('#kvStatus').value;
@@ -10052,18 +10060,19 @@ Sentence: ${raw}`;
   }
 
   /* ---------- register views, sections, navigation ---------- */
-  $('#content').insertAdjacentHTML('beforeend', '<section class="view" id="v-board" hidden></section><section class="view" id="v-videos" hidden></section><section class="view" id="v-tools" hidden></section><section class="view" id="v-reel" hidden></section>');
+  $('#content').insertAdjacentHTML('beforeend', '<section class="view" id="v-board" hidden></section><section class="view" id="v-videos" hidden></section><section class="view" id="v-tools" hidden></section><section class="view" id="v-reel" hidden></section><section class="view" id="v-car2" hidden></section>');
   VIEWS.board = ['לוח בקרה', () => 'KEYVIEW', () => renderBoard()];
   VIEWS.videos = ['כל הסרטונים', () => 'מהבריף ועד המוכן', () => renderVideos()];
   VIEWS.tools = ['כלים מתקדמים', () => 'כל היכולות של המערכת', () => renderTools()];
   VIEWS.reel = ['סרטון חדש', () => 'מהבריף ועד המוכן', () => renderReel()];
+  VIEWS.car2 = ['יצירת קרוסלה', () => 'קרוסלה, פוסט וסטורי', () => renderCar2()];
   VIEWS.projects[0] = 'לקוחות'; VIEWS.projects[1] = () => 'הלקוחות שלך';
   VIEWS.home[0] = 'סרטוני הדגמה'; VIEWS.home[1] = () => 'הסרטים הראשונים של המערכת';
-  const OWN = ['board', 'videos', 'projects', 'media', 'data', 'reel'];
+  const OWN = ['board', 'videos', 'projects', 'media', 'data', 'reel', 'car2'];
   SECTIONS.length = 0;
   SECTIONS.push(
     { id: 'board', n: 'לוח בקרה', d: 'הכול במבט אחד', ic: 'home', views: ['board'] },
-    { id: 'make', n: 'סרטון חדש', d: 'מהבריף ועד המוכן', ic: 'spark', views: ['reel'] },
+    { id: 'make', n: 'סרטון חדש', d: 'מהבריף ועד המוכן', ic: 'spark', views: ['reel', 'car2'] },
     { id: 'videos', n: 'כל הסרטונים', d: 'מהבריף ועד המוכן', ic: 'film', views: ['videos'] },
     { id: 'clients', n: 'לקוחות', d: 'סביבה לכל לקוח', ic: 'users', views: ['projects'] },
     { id: 'media', n: 'ספריית מדיה', d: 'וידאו, תמונות והדמיות', ic: 'image', views: ['media'] },
@@ -10089,7 +10098,7 @@ Sentence: ${raw}`;
   const _rc = renderChrome;
   renderChrome = function () {
     _rc.apply(this, arguments);
-    const free = ['board', 'videos', 'projects', 'tools', 'data', 'home', 'reel'].includes(view);
+    const free = ['board', 'videos', 'projects', 'tools', 'data', 'home', 'reel', 'car2'].includes(view);
     $('#pswitch').hidden = free; if (free) $('#pmenu').hidden = true;
     const st = $('#topStage'); if (st && free) st.hidden = true;
     const ey = $('#crumbEy'); if (ey && ['board', 'videos', 'tools'].includes(view)) ey.textContent = 'KEYVIEW · STUDIO';
@@ -10097,7 +10106,7 @@ Sentence: ${raw}`;
   const _g = go;
   go = function (v) {
     _g.apply(this, arguments);
-    const b = $('#tband'); if (b && ['board', 'videos', 'projects', 'tools', 'reel'].includes(view)) b.hidden = true;
+    const b = $('#tband'); if (b && ['board', 'videos', 'projects', 'tools', 'reel', 'car2'].includes(view)) b.hidden = true;
     const hv = $('#v-board video'); if (hv) { if (view === 'board' && !reduced.matches) hv.play().catch(() => { }); else hv.pause(); }
   };
   const _rp = renderProjects;
@@ -10137,6 +10146,7 @@ Sentence: ${raw}`;
   }
   function openVideo(rid, vid) {
     const r = S.projects.find(p => p.id === rid), v = r && (r.videos || []).find(x => x.id === vid); if (!v) return;
+    if (v.type === 'carousel') { RF = { rid, vid }; try { sessionStorage.setItem('kv.rf', JSON.stringify(RF)); } catch (e) { } carOf(v, r); go('car2'); return; }
     if (v.type !== 'reel') { openDlg({ rid, vid }); return; }
     RF = { rid, vid }; try { sessionStorage.setItem('kv.rf', JSON.stringify(RF)); } catch (e) { }
     flowOf(v, r); go('reel');
@@ -10327,6 +10337,160 @@ Sentence: ${raw}`;
     if (d.rfBroll) { const i = f.prod.broll.indexOf(d.rfBroll); i < 0 ? f.prod.broll.push(d.rfBroll) : f.prod.broll.splice(i, 1); persist(); renderReel(); return; }
     if (d.rfClipdel !== undefined) { await idb.del(v.id); if (CLIPS.has(v.id)) { URL.revokeObjectURL(CLIPS.get(v.id)); CLIPS.delete(v.id); } delete f.prod.clip; persist(); renderReel(); return; }
     if (d.rfStatus) { v.status = d.rfStatus; if (d.rfStatus === 'done') v.doneAt = Date.now(); persist(); renderChrome(); renderReel(); toast(d.rfStatus === 'review' ? 'נשלח לאישור' : d.rfStatus === 'done' ? 'סומן כמוכן' : 'חזרה להפקה'); return; }
+  });
+
+  /* ---------- carousel / post / story generator ---------- */
+  const FMTS = { '4x5': ['קרוסלה 4:5', 1080, 1350], '1x1': ['פוסט ריבוע', 1080, 1080], '9x16': ['סטורי 9:16', 1080, 1920] };
+  const CSTYLES = { lux: 'כהה יוקרתי', light: 'בהיר נקי', brand: 'צבע המותג' };
+  const PRESETS = [
+    { n: 'שאלות לפני קנייה', title: '3 שאלות\nלפני שחותמים\nעל דירה', sub: 'את השלישית כמעט אף אחד לא שואל', pts: [['מתי באמת המסירה?', 'לא התאריך מהמצגת. המועד שכתוב בחוזה, ומה קורה אם הוא נדחה.'], ['מה כתוב על איחורים?', 'פיצוי, תנאים ותקרה. זה חשוב יותר ממחיר המטר.'], ['מה כלול במחיר?', 'חניה, מחסן, מיזוג, מעלית, ומה יתווסף אחרי החתימה.']], cta: 'רוצים את הרשימה המלאה של השאלות?', cta2: 'נשלח אותה בוואטסאפ' },
+    { n: 'למה כאן', title: '3 סיבות\nלהסתכל על\nהפרויקט הזה', sub: 'בלי הבטחות. רק עובדות שאפשר לבדוק', pts: [['המיקום', 'מה נמצא בטווח הליכה, ואיך מגיעים לעבודה.'], ['התמהיל', 'אילו דירות יש, ולמי כל סוג מתאים.'], ['הלו"ז', 'מה השלב היום ומתי מתוכננת המסירה.']], cta: 'רוצים לראות את הפרויקט מקרוב?', cta2: 'קבעו פגישה בלי התחייבות' },
+    { n: 'טעויות נפוצות', title: '3 טעויות\nשקונים עושים\nלפני רכישה', sub: 'כדאי לדעת אותן מראש', pts: [['מסתכלים רק על המחיר', 'חשוב לבדוק גם עלויות נלוות והצמדה.'], ['לא בודקים את המימון', 'אישור עקרוני לפני שנכנסים למשא ומתן.'], ['לא מתייעצים', 'עורך דין ויועץ משכנתאות חוסכים הרבה כאב ראש.']], cta: 'רוצים ליווי מקצועי?', cta2: 'נשמח לעזור' }];
+  function carOf(v, r) {
+    const c = v.car = v.car || {}; const d = r.data || {};
+    if (!c.fmt) c.fmt = '4x5'; if (!c.style) c.style = 'lux';
+    if (!c.title) { const p0 = PRESETS[0]; c.title = p0.title; c.sub = p0.sub; c.pts = p0.pts.map(x => x.slice()); c.cta = p0.cta; c.cta2 = p0.cta2; }
+    c.btn = c.btn || 'שלחו הודעה'; c.phone = c.phone == null ? (d.phone || '') : c.phone; c.proj = c.proj == null ? !!(d.name && d.name !== BLANK) : c.proj;
+    return c;
+  }
+  let FONT_OK = null;
+  function ensureFonts() {
+    if (FONT_OK) return FONT_OK;
+    try { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&family=Heebo:wght@500;800&display=swap'; document.head.appendChild(l); } catch (e) { }
+    const t = new Promise(res => setTimeout(res, 3000));
+    FONT_OK = Promise.race([Promise.all([document.fonts.load('900 100px "Frank Ruhl Libre"', 'אבג'), document.fonts.load('800 40px Heebo', 'אבג'), document.fonts.load('500 40px Heebo', 'אבג')]), t]).catch(() => { });
+    return FONT_OK;
+  }
+  const IMGS = new Map();
+  function loadImg(src) { if (!src) return Promise.resolve(null); if (IMGS.has(src)) return IMGS.get(src); const p = new Promise(res => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = src; }); IMGS.set(src, p); return p; }
+  function cover(ctx, im, W, H, fy = .5) { const s = Math.max(W / im.width, H / im.height), w = im.width * s, h = im.height * s; ctx.drawImage(im, (W - w) / 2, (H - h) * fy, w, h); }
+  function wrap(ctx, text, maxW) {
+    const out = []; String(text || '').split('\n').forEach(par => { let line = ''; par.split(/\s+/).filter(Boolean).forEach(w => { const t = line ? line + ' ' + w : w; if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; } else line = t; }); out.push(line); });
+    return out.filter((l, i, a) => l || a.length === 1);
+  }
+  function fitFs(ctx, text, fs0, maxW, min, font) { let fs = fs0; const pars = String(text || '').split('\n'); for (; fs > min; fs -= 4) { ctx.font = font(fs); if (pars.every(p => ctx.measureText(p).width <= maxW)) break; } return fs; }
+  function slidesOf(c, r) {
+    const out = [{ k: 'cover' }]; (c.pts || []).forEach((p, i) => out.push({ k: 'pt', i, p })); if (c.proj) out.push({ k: 'proj' }); out.push({ k: 'cta' }); return out;
+  }
+  const palette = (st, r) => {
+    const d = r.data || {}, acc = d.accent || '#C07E33', pri = d.primary || '#0B3B4C';
+    if (st === 'light') return { bg: '#F6F1E8', ink: '#0B2A36', mute: 'rgba(11,42,54,.72)', gold: acc, btn: acc, btnInk: '#fff', light: true };
+    if (st === 'brand') return { bg: pri, ink: '#fff', mute: 'rgba(255,255,255,.85)', gold: '#F2C46B', btn: '#E8743B', btnInk: '#fff', brand: true };
+    return { bg: '#0a1a22', ink: '#fff', mute: 'rgba(255,255,255,.88)', gold: '#F2C46B', btn: '#E8743B', btnInk: '#fff' };
+  };
+  const SERIF = '"Frank Ruhl Libre","Times New Roman",serif', SANS = 'Heebo,"IBM Plex Sans Hebrew",Arial,sans-serif';
+  function drawSlide(cv, c, r, idx, sl, n, im) {
+    const [, W, H] = FMTS[c.fmt] || FMTS['4x5']; cv.width = W; cv.height = H; const ctx = cv.getContext('2d'); const P = palette(c.style, r), M = 84, k = H < 1200 ? .86 : 1, name = (r.data && r.data.name && r.data.name !== BLANK) ? r.data.name : '';
+    ctx.direction = 'rtl'; ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = P.bg; ctx.fillRect(0, 0, W, H);
+    const photoFull = !P.light;
+    if (im) {
+      if (P.light) { ctx.save(); const ph = sl.k === 'cover' ? H * .36 : sl.k === 'proj' ? H * .46 : H * .3; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(M, M + 70, W - 2 * M, ph, 36) : ctx.rect(M, M + 70, W - 2 * M, ph); ctx.clip(); ctx.translate(M, M + 70); cover(ctx, im, W - 2 * M, ph, .35); ctx.restore(); }
+      else { ctx.save(); if (P.brand && sl.k !== 'cover' && sl.k !== 'proj') ctx.globalAlpha = .28; cover(ctx, im, W, H, sl.k === 'proj' ? .2 : .5); ctx.restore(); }
+    }
+    if (photoFull) {
+      const g = ctx.createLinearGradient(0, 0, 0, H), heavy = sl.k === 'pt' || sl.k === 'cta';
+      if (P.brand) { g.addColorStop(0, 'rgba(0,0,0,.05)'); g.addColorStop(1, 'rgba(0,0,0,.55)'); }
+      else if (sl.k === 'cover' || sl.k === 'proj') { g.addColorStop(0, 'rgba(6,14,20,.15)'); g.addColorStop(.35, 'rgba(6,14,20,.22)'); g.addColorStop(1, 'rgba(6,14,20,.9)'); }
+      else { g.addColorStop(0, 'rgba(6,14,20,.62)'); g.addColorStop(1, 'rgba(6,14,20,.9)'); }
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    const R = W - M; ctx.textAlign = 'right';
+    ctx.font = `800 ${30 * k}px ${SANS}`; ctx.fillStyle = P.gold; ctx.fillText(name, R, M + 34);
+    ctx.textAlign = 'left'; ctx.fillStyle = P.light ? P.mute : 'rgba(255,255,255,.75)'; ctx.font = `500 ${30 * k}px ${SANS}`;
+    ctx.fillText(sl.k === 'pt' ? `${sl.i + 1} / ${(c.pts || []).length}` : '', M, M + 34);
+    ctx.textAlign = 'right';
+    const text = (str, font, color, x, y, maxW, lh, align = 'right') => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align; const ls = wrap(ctx, str, maxW); ls.forEach((l, i) => ctx.fillText(l, x, y + i * lh)); return ls.length * lh; };
+    const lineH = (px, f = 1.08) => px * f;
+    const bottom = H - M - 70;
+    const textTop = P.light && im ? M + 70 + (sl.k === 'cover' ? H * .36 : sl.k === 'proj' ? H * .46 : H * .3) + 50 : 0;
+    if (sl.k === 'cover') {
+      const fs = fitFs(ctx, c.title, (P.light ? 140 : 168) * k, W - 2 * M, 80, f => `900 ${f}px ${SERIF}`), ls = wrap((ctx.font = `900 ${fs}px ${SERIF}`, ctx), c.title, W - 2 * M), sub = c.sub ? wrap((ctx.font = `500 ${48 * k}px ${SANS}`, ctx), c.sub, W - 2 * M) : [];
+      const th = ls.length * lineH(fs), sh = sub.length ? sub.length * 66 * k + 30 : 0, cue = H > 1200 ? 90 : 0;
+      let y = Math.max(textTop + fs, bottom - cue - sh - th + fs * .88);
+      ls.forEach((l, i) => { ctx.font = `900 ${fs}px ${SERIF}`; ctx.fillStyle = (ls.length > 1 && i === (ls.length > 2 ? 1 : ls.length - 1)) ? P.gold : P.ink; ctx.fillText(l, R, y + i * lineH(fs)); });
+      y += (ls.length - 1) * lineH(fs) + 70 * k;
+      sub.forEach((l, i) => { ctx.font = `500 ${48 * k}px ${SANS}`; ctx.fillStyle = P.mute; ctx.fillText(l, R, y + i * 66 * k); });
+      if (H > 1200) { ctx.font = `800 ${38 * k}px ${SANS}`; ctx.fillStyle = P.gold; ctx.fillText('החליקו', R, H - M - 14); const w = ctx.measureText('החליקו').width; ctx.strokeStyle = P.gold; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(R - w - 24, H - M - 26); ctx.lineTo(R - w - 110, H - M - 26); ctx.moveTo(R - w - 92, H - M - 42); ctx.lineTo(R - w - 110, H - M - 26); ctx.lineTo(R - w - 92, H - M - 10); ctx.stroke(); }
+    } else if (sl.k === 'pt') {
+      const nf = (P.light ? 210 : (H < 1200 ? 380 : 520)) * k; ctx.font = `900 ${nf}px ${SERIF}`; ctx.fillStyle = P.gold; ctx.globalAlpha = .96; ctx.textAlign = 'right'; ctx.fillText(String(sl.i + 1), R, P.light ? textTop + nf * .72 : M + 70 + nf * .82); ctx.globalAlpha = 1;
+      const fs = fitFs(ctx, sl.p[0], (P.light ? 96 : 112) * k, W - 2 * M, 64, f => `900 ${f}px ${SERIF}`), tl = wrap((ctx.font = `900 ${fs}px ${SERIF}`, ctx), sl.p[0], W - 2 * M), sub = wrap((ctx.font = `500 ${48 * k}px ${SANS}`, ctx), sl.p[1] || '', W - 2 * M);
+      const sh = sub.length * 66 * k, th = tl.length * lineH(fs, 1.1), y0 = bottom - sh - 34 - th + fs * .85;
+      tl.forEach((l, i) => { ctx.font = `900 ${fs}px ${SERIF}`; ctx.fillStyle = P.ink; ctx.fillText(l, R, y0 + i * lineH(fs, 1.1)); });
+      sub.forEach((l, i) => { ctx.font = `500 ${48 * k}px ${SANS}`; ctx.fillStyle = P.mute; ctx.fillText(l, R, y0 + tl.length * lineH(fs, 1.1) + 20 + i * 66 * k); });
+    } else if (sl.k === 'proj') {
+      const d = r.data || {}, fs = 112 * k; const chips = [d.city, d.units ? `${d.units} דירות` : '', d.stage, d.tagline].filter(Boolean).slice(0, 4);
+      const rows = []; let cur = [], cw = 0; ctx.font = `800 ${40 * k}px ${SANS}`; chips.forEach(t => { const w = ctx.measureText(t).width + 76; if (cw + w > W - 2 * M && cur.length) { rows.push(cur); cur = []; cw = 0; } cur.push([t, w]); cw += w + 18; }); if (cur.length) rows.push(cur);
+      const chH = rows.length * 84, y0 = bottom - chH - 50 - fs * 2 + fs * .8;
+      ctx.font = `900 ${fs}px ${SERIF}`; ctx.fillStyle = P.ink; ctx.fillText('הכירו את', R, y0); ctx.fillStyle = P.gold; ctx.fillText(name || 'הפרויקט', R, y0 + lineH(fs, 1.1));
+      rows.forEach((row, ri) => { let x = R; row.forEach(([t, w]) => { const y = bottom - chH + ri * 84 + 20; ctx.fillStyle = P.light ? 'rgba(11,42,54,.08)' : 'rgba(255,255,255,.16)'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x - w, y, w, 66, 33) : ctx.rect(x - w, y, w, 66); ctx.fill(); ctx.strokeStyle = P.light ? 'rgba(11,42,54,.25)' : 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.stroke(); ctx.fillStyle = P.ink; ctx.textAlign = 'center'; ctx.font = `800 ${40 * k}px ${SANS}`; ctx.fillText(t, x - w / 2, y + 46); x -= w + 18; }); ctx.textAlign = 'right'; });
+    } else {
+      const fs = 108 * k, cy = P.light && im ? (textTop + bottom) / 2 - 80 : H / 2 - 150; ctx.textAlign = 'center';
+      const tl = wrap((ctx.font = `900 ${fs}px ${SERIF}`, ctx), c.cta, W - 2 * M); let y = cy;
+      tl.forEach((l, i) => { ctx.font = `900 ${fs}px ${SERIF}`; ctx.fillStyle = P.ink; ctx.fillText(l, W / 2, y + i * lineH(fs, 1.1)); }); y += tl.length * lineH(fs, 1.1) + 20;
+      if (c.cta2) { ctx.font = `500 ${48 * k}px ${SANS}`; ctx.fillStyle = P.mute; ctx.fillText(c.cta2, W / 2, y + 30); y += 90; }
+      const bw = 560 * k, bh = 120 * k; ctx.fillStyle = P.btn; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W / 2 - bw / 2, y + 20, bw, bh, bh / 2) : ctx.rect(W / 2 - bw / 2, y + 20, bw, bh); ctx.fill(); ctx.fillStyle = P.btnInk; ctx.font = `800 ${58 * k}px ${SANS}`; ctx.fillText(c.btn, W / 2, y + 20 + bh * .66);
+      if (c.phone) { ctx.direction = 'ltr'; ctx.fillStyle = P.ink; ctx.font = `800 ${54 * k}px ${SANS}`; ctx.fillText(c.phone, W / 2, y + 20 + bh + 90); ctx.direction = 'rtl'; }
+    }
+    ctx.textAlign = 'left'; ctx.fillStyle = P.light ? P.mute : 'rgba(255,255,255,.7)'; ctx.font = `800 ${28 * k}px ${SANS}`; ctx.direction = 'ltr'; ctx.fillText(`${idx + 1}/${n}`, M, H - M + 20); ctx.direction = 'rtl';
+  }
+  const CV = { urls: [] };
+  async function drawAll() {
+    const { r, v } = rfCur(); if (!v || v.type !== 'carousel') return; const c = carOf(v, r); await ensureFonts();
+    const sls = slidesOf(c, r), imgs = (r.assets || []).filter(a => a.src && !a.vector).map(a => a.src), host = $('#carGrid2'); if (!host) return;
+    host.innerHTML = sls.map((s, i) => `<div class="kv-cs"><canvas data-cs="${i}" aria-label="שקף ${i + 1}"></canvas><div class="kv-csb"><span>${i + 1}</span><button type="button" class="btn sm" data-car-save="${i}">${ic('down')}שמירה</button></div></div>`).join('');
+    for (let i = 0; i < sls.length; i++) { const src = imgs.length ? imgs[(sls[i].k === 'cover' ? 0 : i) % imgs.length] : ''; const im = await loadImg(src); const cv = host.querySelector(`[data-cs="${i}"]`); if (cv) drawSlide(cv, c, r, i, sls[i], sls.length, im); }
+  }
+  const drawSoon = debounce(drawAll, 300);
+  function capText(c, r) { const d = r.data || {}; return [c.title.replace(/\n/g, ' '), '', ...(c.pts || []).map((p, i) => `${i + 1}. ${p[0]}: ${p[1]}`), '', [c.cta, c.cta2].filter(Boolean).join(' '), c.phone || ''].join('\n').trim() + (c.proj ? '\n*התמונות להמחשה בלבד' : ''); }
+  function renderCar2() {
+    const el = $('#v-car2'), { r, v } = rfCur(); if (!v) { go('board'); return; } const c = carOf(v, r);
+    el.innerHTML = `<div class="kv-rf-top"><span class="kv-crumb">יצירה · <b>${tyOf(v.type).n}</b>${isPh(r) ? '' : ' · ' + esc(r.data.name)}</span><span class="kv-rf-acts"><button type="button" class="btn sm" data-rf-details>פרטים</button></span></div>
+    <h1 class="kv-rf-h">${esc(v.title)}</h1>
+    <div class="grid2 wide"><div class="panel"><div class="panel-h"><h2>התוכן</h2><span class="hint">עריכה מתעדכנת בתצוגה</span></div><div class="panel-b" style="display:grid;gap:12px">
+      <div class="f"><label>נושא מוכן</label><div class="kv-chips">${PRESETS.map((p, i) => `<button type="button" class="kv-chip" data-car-preset="${i}">${esc(p.n)}</button>`).join('')}</div></div>
+      <div class="f"><label for="cTitle">כותרת הוק (שורה לכל מילה גדולה)</label><textarea class="in" id="cTitle" data-car="title" rows="3">${esc(c.title)}</textarea></div>
+      <div class="f"><label for="cSub">שורת משנה</label><input class="in" id="cSub" data-car="sub" value="${esc(c.sub || '')}"></div>
+      <div class="f"><label>נקודות (כותרת ומשפט)</label><div class="kv-pts">${(c.pts || []).map((p, i) => `<div class="kv-pt"><input class="in" data-car-pt="${i}:0" value="${esc(p[0])}" aria-label="כותרת נקודה ${i + 1}"><textarea class="in" data-car-pt="${i}:1" rows="2" aria-label="משפט נקודה ${i + 1}">${esc(p[1])}</textarea><button type="button" class="x" data-car-del="${i}" aria-label="מחיקת נקודה">${ic('x')}</button></div>`).join('')}</div>${(c.pts || []).length < 8 ? `<button type="button" class="btn sm" data-car-add>${ic('plus')}הוספת נקודה</button>` : ''}</div>
+      <div class="f"><label for="cCta">קריאה לפעולה</label><input class="in" id="cCta" data-car="cta" value="${esc(c.cta || '')}"><input class="in" data-car="cta2" value="${esc(c.cta2 || '')}" aria-label="שורת משנה לקריאה" style="margin-top:6px"></div>
+      <div class="f"><label for="cBtn">כפתור וטלפון</label><div class="row"><input class="in" id="cBtn" data-car="btn" value="${esc(c.btn)}" style="flex:1"><input class="in" data-car="phone" value="${esc(c.phone || '')}" placeholder="טלפון" style="flex:1" aria-label="טלפון"></div></div>
+      <label class="kv-sw"><input type="checkbox" data-car-proj ${c.proj ? 'checked' : ''}><span><b>שקף פרויקט</b><span class="hint">שם הלקוח ופרטים קצרים</span></span></label>
+    </div></div>
+    <div style="display:grid;gap:18px;min-width:0;align-content:start"><div class="panel"><div class="panel-h"><h2>עיצוב</h2></div><div class="panel-b" style="display:grid;gap:12px">
+      <div class="f"><label>סגנון</label><div class="kv-chips">${Object.entries(CSTYLES).map(([k, n]) => `<button type="button" class="kv-chip" data-car-style="${k}" aria-pressed="${c.style === k}">${n}</button>`).join('')}</div></div>
+      <div class="f"><label>פורמט</label><div class="kv-chips">${Object.entries(FMTS).map(([k, f]) => `<button type="button" class="kv-chip" data-car-fmt="${k}" aria-pressed="${c.fmt === k}">${f[0]}</button>`).join('')}</div></div>
+      <div class="hint">רקעים נלקחים מספריית המדיה של הלקוח. ${(r.assets || []).some(a => a.src && !a.vector) ? '' : 'עוד אין מדיה ללקוח הזה, ולכן הרקע חלק.'}</div></div></div>
+      <div class="panel"><div class="panel-b" style="display:grid;gap:10px"><button type="button" class="btn sun" data-car-all>${ic('send')}שמירה ושיתוף של כל השקפים</button><button type="button" class="btn" data-car-cap>${ic('copy')}העתקת כיתוב לפוסט</button><div class="row"><button type="button" class="btn" data-car-status="review">שליחה לאישור</button><button type="button" class="btn" data-car-status="done">סימון כמוכן</button></div></div></div></div></div>
+    <div class="kv-sec-h"><h3>תצוגה מקדימה</h3><span class="hint">${slidesOf(c, r).length} שקפים</span></div><div class="kv-cgrid" id="carGrid2"></div>`;
+    drawAll();
+  }
+  async function shareSlides(idxs) {
+    const { r, v } = rfCur(); if (!v) return; const files = [];
+    for (const i of idxs) { const cv = $(`[data-cs="${i}"]`); if (!cv) continue; const b = await new Promise(res => cv.toBlob(res, 'image/png')); if (b) files.push(new File([b], `${(r.data.name || 'slide').replace(/\s+/g, '-')}-${i + 1}.png`, { type: 'image/png' })); }
+    if (!files.length) return;
+    try { if (navigator.canShare && navigator.canShare({ files })) { await navigator.share({ files }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    for (let k = 0; k < files.length; k++) { const a = document.createElement('a'); a.href = URL.createObjectURL(files[k]); a.download = files[k].name; document.body.appendChild(a); a.click(); a.remove(); await new Promise(res => setTimeout(res, 350)); }
+    toast('השקפים נשמרו');
+  }
+  const car2el = $('#v-car2');
+  car2el.addEventListener('input', e => {
+    const t = e.target, { r, v } = rfCur(); if (!v) return; const c = carOf(v, r);
+    if (t.dataset.car) c[t.dataset.car] = t.value; else if (t.dataset.carPt) { const [i, j] = t.dataset.carPt.split(':').map(Number); c.pts[i][j] = t.value; } else return;
+    persistSoon(); drawSoon();
+  });
+  car2el.addEventListener('change', e => { const t = e.target, { r, v } = rfCur(); if (!v) return; const c = carOf(v, r); if (t.dataset.carProj !== undefined) { c.proj = t.checked; persist(); renderCar2(); } });
+  car2el.addEventListener('click', async e => {
+    const t = e.target.closest('button'); if (!t) return; const d = t.dataset, { r, v } = rfCur(); if (!v) return; const c = carOf(v, r);
+    if (d.rfDetails !== undefined) { openDlg({ rid: r.id, vid: v.id }); return; }
+    if (d.carPreset) { const p = PRESETS[+d.carPreset]; Object.assign(c, { title: p.title, sub: p.sub, pts: p.pts.map(x => x.slice()), cta: p.cta, cta2: p.cta2 }); persist(); renderCar2(); return; }
+    if (d.carStyle) { c.style = d.carStyle; persist(); renderCar2(); return; }
+    if (d.carFmt) { c.fmt = d.carFmt; persist(); renderCar2(); return; }
+    if (d.carDel !== undefined) { c.pts.splice(+d.carDel, 1); persist(); renderCar2(); return; }
+    if (d.carAdd !== undefined) { c.pts.push(['כותרת חדשה', 'משפט קצר שמסביר.']); persist(); renderCar2(); return; }
+    if (d.carSave !== undefined) { shareSlides([+d.carSave]); return; }
+    if (d.carAll !== undefined) { shareSlides(slidesOf(c, r).map((_, i) => i)); return; }
+    if (d.carCap !== undefined) { copyText(capText(c, r)); return; }
+    if (d.carStatus) { v.status = d.carStatus; if (d.carStatus === 'done') v.doneAt = Date.now(); persist(); renderChrome(); toast(d.carStatus === 'review' ? 'נשלח לאישור' : 'סומן כמוכן'); }
   });
 
   /* ---------- events ---------- */
